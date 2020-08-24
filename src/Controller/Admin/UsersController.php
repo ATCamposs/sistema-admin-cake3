@@ -56,7 +56,7 @@ class UsersController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Erro: Usuário não foi cadastrado.'));
+            $this->Flash->error(__('ERRO: O usuário não pode ser salvo.'));
         }
         $this->set(compact('user'));
     }
@@ -80,7 +80,7 @@ class UsersController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Erro: Usuário não foi editado com sucesso.'));
+            $this->Flash->error(__('ERRO: Alterações não puderam ser salvas.'));
         }
         $this->set(compact('user'));
     }
@@ -99,9 +99,25 @@ class UsersController extends AppController
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('Usuário deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('Erro: Usuário não pode ser deletado.'));
+            $this->Flash->error(__('ERRO: o usuário não pode ser deletado.'));
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function login()
+    {
+        if($this->request->is('post')){
+            $user = $this->Auth->identify();
+            if($user){
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+        }
+    }
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
     }
 }
