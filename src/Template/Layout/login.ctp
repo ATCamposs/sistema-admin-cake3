@@ -26,7 +26,7 @@ $cakeDescription = 'Administrativo';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['mdb.min.css', 'signin.css']) ?>
+    <?= $this->Html->css(['mdb.min.css', 'signin.css', 'bootstrap.css']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
