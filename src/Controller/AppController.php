@@ -51,7 +51,8 @@ class AppController extends Controller
             'logoutRedirect'=>[
                 'controller'=>'users',
                 'action'=>'login'
-            ]
+            ],
+            'authError' => false
         ]);
 
         /*
