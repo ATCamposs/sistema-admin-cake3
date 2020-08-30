@@ -26,7 +26,12 @@ $cakeDescription = 'Administrativo';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['mdb.min.css', 'bootstrap.css', 'dashboard.css', 'fontawesome.min.css']) ?>
+    <?= $this->Html->css([
+        'href="https://use.fontawesome.com/releases/v5.8.2/css/all.css',
+        'href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap',
+        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css',
+        'dashboard.css']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -89,6 +94,11 @@ $cakeDescription = 'Administrativo';
             </div>
         </div>
 
-    <?= $this->Html->script(['jquery.min.js', 'bootstrap.min.js', 'mdb.min.js', 'dashboard.js', 'fontawesome-all.min.js', 'popper.min.js']) ?>
+    <?= $this->Html->script([
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js',
+        'dashboard.js']) ?>
 </body>
 </html>
