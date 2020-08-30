@@ -60,7 +60,7 @@ class UsersController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('ERRO: O usuário não pode ser salvo.'));
+            $this->Flash->danger(__('ERRO: O usuário não pode ser salvo.'));
         }
         $this->set(compact('user'));
     }
@@ -84,7 +84,7 @@ class UsersController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('ERRO: Alterações não puderam ser salvas.'));
+            $this->Flash->danger(__('ERRO: Alterações não puderam ser salvas.'));
         }
         $this->set(compact('user'));
     }
@@ -103,7 +103,7 @@ class UsersController extends AppController
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('Usuário deletado com sucesso.'));
         } else {
-            $this->Flash->error(__('ERRO: o usuário não pode ser deletado.'));
+            $this->Flash->danger(__('ERRO: o usuário não pode ser deletado.'));
         }
 
         return $this->redirect(['action' => 'index']);
