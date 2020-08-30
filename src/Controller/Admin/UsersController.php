@@ -45,6 +45,13 @@ class UsersController extends AppController
         $this->set('user', $user);
     }
 
+    public function perfil()
+    {
+        $user = $this->Auth->user();
+
+        $this->set(compact('user'));
+    }
+
     /**
      * Add method
      *
