@@ -24,7 +24,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <?= $this->Html->link('<i class="fas fa-user"></i> Perfil',
                     [
-                        'controller' => 'users',
+                        'controller' => 'Users',
                         'action' => 'perfil'
                     ],
                     [
@@ -33,7 +33,7 @@
                     ]) ?>
                     <?= $this->Html->link('<i class="fas fa-sign-out-alt"></i> Sair',
                     [
-                        'controller' => 'users',
+                        'controller' => 'Users',
                         'action' => 'logout'
                     ],
                     [

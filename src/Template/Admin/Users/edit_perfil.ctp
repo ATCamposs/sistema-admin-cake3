@@ -1,20 +1,14 @@
 <div class="d-flex">
     <div class="mr-auto p-2">
-        <h2 class="display-4 titulo">Editar Usuário</h2>
+        <h2 class="display-4 titulo">Editar Perfil</h2>
     </div>
-        <div class="p-2">
-            <?= $this->Html->link(__('Listar'),
-            ['controller' => 'Users', 'action' => 'index'], 
-            ['class' => 'btn btn-outline-info btn-sm']) ?>
-            <?= $this->Html->link(__('Visualizar'),
-            ['controller' => 'Users', 'action' => 'view', $user->id], 
-            ['class' => 'btn btn-outline-primary btn-sm']) ?>
-            <?= $this->Form->postLink(__('Apagar'),
-            ['controller' => 'Users', 'action' => 'delete', $user->id], 
-            ['class' => 'btn btn-outline-danger btn-sm', 'confirm' => __('Realmente deseja apagar o usuário: {0} ?', $user->name)]) ?>
-        </div>
-    </a>
-</div><hr>
+    <div class="p-2">
+        <?= $this->Html->link(__('Visualizar'),
+        ['controller' => 'Users', 'action' => 'perfil'], 
+        ['class' => 'btn btn-outline-primary btn-sm']) ?>
+    </div>
+</div>
+<hr>
 <?= $this->Flash->render() ?>
 
 <?= $this->Form->create($user) ?>

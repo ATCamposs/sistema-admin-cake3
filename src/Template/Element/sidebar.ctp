@@ -5,7 +5,7 @@
                 <?= $this->Html->link(
                     '<i class="fas fa-tachometer-alt"></i> Dashboard',
                     [
-                        'controller' => 'welcome',
+                        'controller' => 'Welcome',
                         'action' => 'index'
                     ],
                     [
@@ -17,7 +17,7 @@
             <?= $this->Html->link(
                     '<i class="fas fa-users"></i> Usuários',
                     [
-                        'controller' => 'users',
+                        'controller' => 'Users',
                         'action' => 'index'
                     ],
                     [
@@ -29,7 +29,7 @@
             <?= $this->Html->link(
                     '<i class="fas fa-sign-out-alt"></i> Sair',
                     [
-                        'controller' => 'users',
+                        'controller' => 'Users',
                         'action' => 'logout'
                     ],
                     [
