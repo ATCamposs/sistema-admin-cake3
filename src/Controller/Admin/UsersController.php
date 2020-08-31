@@ -165,6 +165,32 @@ class UsersController extends AppController
             'contain' => []
         ]);
 
+        if($this->request->is(['patch', 'post', 'put'])){
+            $img_name = $this->request->getData()['imagem']['name'];
+            $img_tmp = $this->request->getData()['imagem']['tmp_name'];
+            $users = $this->Users->newEntity();
+            $user->id = $user_id;
+            $user->imagem = $img_name;
+
+            $destine = 'files/user/'.$user_id.'/'.$img_name;
+
+            if(move_uploaded_file($img_tmp, WWW_ROOT.$destine)){
+                if($this->Users->save($user)){
+                    if($this->Auth->user('id') === $user->id){
+                        $user = $this->Users->get($user_id, [
+                            'contain' => []
+                        ]);
+                        $this->Auth->setUser($user);
+                    }
+                    
+                    $this->Flash->success(__('Imagem atualizada com sucesso.'));
+                    return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
+                }else{
+                    $this->Flash->danger(__('Erro: Imagem não atualizada.'));
+                }
+            }
+        }
+
         $this->set(compact('user'));
     }
     /**
