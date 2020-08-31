@@ -21,6 +21,19 @@
 <?= $this->Flash->render() ?>
 
 <dl class="row">
+    <dt class="col-sm-3">Imagem</dt>
+    <dd class="col-sm-9">
+    <?php
+    if(!empty($perfilUser['imagem'])){
+        $imagem_usuario = $this->Html->image('../files/user/' . $perfilUser['id'] . '/' . $perfilUser['imagem'], ['class' => 'rounded-circle', 'width' => 120, 'height' => 120]);
+    } else {
+        $imagem_usuario = $this->Html->image('../files/user/logo-gato.png');
+    }
+    echo $imagem_usuario;
+
+    echo $this->Html->link(__('Alterar Foto'), ['action' => 'changePicturePerfil'], ['class' => 'btn btn-outline-primary btn-sm'])
+    ?>
+    </dd>
     <dt class="col-sm-3">ID</dt>
     <dd class="col-sm-9"><?= $this->Number->format($user['id']) ?></dd>
 

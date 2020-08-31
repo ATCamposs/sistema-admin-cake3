@@ -158,6 +158,15 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
+    public function changePicturePerfil()
+    {
+        $user_id = $this->Auth->user('id');
+        $user = $this->Users->get($user_id, [
+            'contain' => []
+        ]);
+
+        $this->set(compact('user'));
+    }
     /**
      * Delete method
      *
