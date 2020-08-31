@@ -165,6 +165,8 @@ class UsersController extends AppController
             'contain' => []
         ]);
 
+        $old_image = $user->imagem;
+
         if($this->request->is(['patch', 'post', 'put'])){
             $img_name = $this->request->getData()['imagem']['name'];
             $img_tmp = $this->request->getData()['imagem']['tmp_name'];
@@ -175,8 +177,13 @@ class UsersController extends AppController
             $destine = 'files/user/'.$user_id.'/'.$img_name;
 
             if(move_uploaded_file($img_tmp, WWW_ROOT.$destine)){
+                if((!!$old_image) &&  ($old_image != $user->imagem)){
+                    unlink(WWW_ROOT.'files/user/'.$user->id.'/'.$old_image);
+                }
+
                 if($this->Users->save($user)){
                     if($this->Auth->user('id') === $user->id){
+                        //Atualiza informação pós uplad
                         $user = $this->Users->get($user_id, [
                             'contain' => []
                         ]);
