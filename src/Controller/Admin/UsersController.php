@@ -96,7 +96,24 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
-    public function editPerfil()
+    public function adminEditPassword($id = null)
+    {
+        $user = $this->Users->get($id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('Senha do usuário editado com sucesso.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->danger(__('ERRO: Alterações não puderam ser salvas.'));
+        }
+        $this->set(compact('user'));
+    }
+
+    public function editProfile()
     {
         $user_id = $this->Auth->user('id');
         $user = $this->Users->get($user_id, [
@@ -112,6 +129,26 @@ class UsersController extends AppController
                 }
 
                 $this->Flash->success(__('Perfil editado com sucesso.'));
+
+                return $this->redirect(['controller' => 'Users', 'action' => 'perfil']);
+            }
+            $this->Flash->danger(__('ERRO: Alterações não puderam ser salvas.'));
+        }
+
+        $this->set(compact('user'));
+    }
+
+    public function editPassword()
+    {
+        $user_id = $this->Auth->user('id');
+        $user = $this->Users->get($user_id, [
+            'contain' => []
+        ]);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('Senha editada com sucesso.'));
 
                 return $this->redirect(['controller' => 'Users', 'action' => 'perfil']);
             }

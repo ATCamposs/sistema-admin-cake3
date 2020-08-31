@@ -6,6 +6,7 @@
         <span class="d-none d-md-block">
             <?= $this->Html->link(__('Listar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-outline-info btn-sm']) ?>
             <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'btn btn-outline-warning btn-sm']) ?>
+            <?= $this->Html->link(__('Editar Senha'), ['controller' => 'Users', 'action' => 'adminEditPassword', $user->id], ['class' => 'btn btn-outline-warning btn-sm']) ?>
             <?= $this->Form->postLink(__('Apagar'), ['controller' => 'Users', 'action' => 'delete', $user->id], ['class' => 'btn btn-outline-danger btn-sm', 'confirm' => __('Relamente deseja apagar o usuário: {0}?', $user->name)]) ?>
         </span>
         <div class="dropdown d-block d-md-none">
@@ -15,6 +16,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
                 <?= $this->Html->link(__('Listar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'dropdown-item']) ?>
                 <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'dropdown-item']) ?>
+                <?= $this->Html->link(__('Editar Senha'), ['controller' => 'Users', 'action' => 'adminEditPassword', $user->id], ['class' => 'btn btn-outline-warning btn-sm']) ?>
                 <?= $this->Form->postLink(__('Apagar'), ['controller' => 'Users', 'action' => 'delete', $user->id], ['class' => 'dropdown-item', 'confirm' => __('Relamente deseja apagar o usuário # {0}?', $user->id)]) ?>                                    
             </div>
         </div>
