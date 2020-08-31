@@ -45,7 +45,7 @@ class UsersController extends AppController
         $this->set('user', $user);
     }
 
-    public function perfil()
+    public function profile()
     {
         $user = $this->Auth->user();
 
@@ -130,7 +130,7 @@ class UsersController extends AppController
 
                 $this->Flash->success(__('Perfil editado com sucesso.'));
 
-                return $this->redirect(['controller' => 'Users', 'action' => 'perfil']);
+                return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
             }
             $this->Flash->danger(__('ERRO: Alterações não puderam ser salvas.'));
         }
@@ -150,7 +150,7 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Senha editada com sucesso.'));
 
-                return $this->redirect(['controller' => 'Users', 'action' => 'perfil']);
+                return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
             }
             $this->Flash->danger(__('ERRO: Alterações não puderam ser salvas.'));
         }
@@ -158,7 +158,7 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
-    public function changePicturePerfil()
+    public function changePictureProfile()
     {
         $user_id = $this->Auth->user('id');
         $user = $this->Users->get($user_id, [

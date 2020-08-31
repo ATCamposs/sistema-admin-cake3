@@ -4,7 +4,7 @@
     </div>
     <div class="p-2">
         <?= $this->Html->link(__('Visualizar'),
-        ['controller' => 'Users', 'action' => 'perfil'], 
+        ['controller' => 'Users', 'action' => 'profile'], 
         ['class' => 'btn btn-outline-primary btn-sm']) ?>
     </div>
     <div class="dropdown d-block d-md-none">

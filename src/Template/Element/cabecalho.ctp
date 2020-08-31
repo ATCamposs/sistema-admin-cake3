@@ -1,8 +1,8 @@
 <?php 
-    $primeiro_nome = str_word_count($perfilUser['name']) >= 2 ? current(str_word_count($perfilUser['name'], 2)) : $perfilUser['name'];
+    $primeiro_nome = str_word_count($profileUser['name']) >= 2 ? current(str_word_count($profileUser['name'], 2)) : $profileUser['name'];
 
-    if(!empty($perfilUser['imagem'])){
-        $imagem_usuario = $this->Html->image('../files/user/' . $perfilUser['id'] . '/' . $perfilUser['imagem'], ['class' => 'rounded-circle', 'width' => 20, 'height' => 20]);
+    if(!empty($profileUser['imagem'])){
+        $imagem_usuario = $this->Html->image('../files/user/' . $profileUser['id'] . '/' . $profileUser['imagem'], ['class' => 'rounded-circle', 'width' => 20, 'height' => 20]);
     } else {
         $imagem_usuario = $this->Html->image('../files/user/logo-gato.png');
     }
@@ -25,7 +25,7 @@
                     <?= $this->Html->link('<i class="fas fa-user"></i> Perfil',
                     [
                         'controller' => 'Users',
-                        'action' => 'perfil'
+                        'action' => 'profile'
                     ],
                     [
                         'class' => 'dropdown-item',
