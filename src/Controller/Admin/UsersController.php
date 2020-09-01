@@ -162,52 +162,31 @@ class UsersController extends AppController
     {
         $user_id = $this->Auth->user('id');
         $user = $this->Users->get($user_id);
+        $old_image = $user->imagem;
 
         if($this->request->is(['patch', 'post', 'put'])){
-            $user = $this->Users->newEntity();
+            //newEntity tem que ser chamado depois de patchEntity
             $user = $this->Users->patchEntity($user, $this->request->data);
             $destine = WWW_ROOT.'files/user/'.$user_id.'/';
+            $user = $this->Users->newEntity();
             $user->imagem = $this->Users->singleUpload($this->request->getData()['imagem'], $destine);
             if($user->imagem){
-                $this->Flash->success(__('Imagem atualizada com sucesso.'));
+                $user->id = $user_id;
+                if($this->Users->save($user)){
+                    if($this->Auth->user('id') === $user->id){
+                        //Atualiza informação pós uplad
+                        $this->Auth->setUser($user);
+                    }
+                    $this->Flash->success(__('Imagem atualizada com sucesso.'));
+                    if((!!$old_image) &&  ($old_image != $user->imagem)){
+                        unlink($destine.$old_image);
+                        return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
+                    }
+                }
             }else{
                 $this->Flash->danger(__('Erro: Imagem não atualizada.'));
             }
         }
-
-        //$old_image = $user->imagem;
-
-        /*if($this->request->is(['patch', 'post', 'put'])){
-            $img_name = $this->request->getData()['imagem']['name'];
-            $img_tmp = $this->request->getData()['imagem']['tmp_name'];
-            $users = $this->Users->newEntity();
-            $user->id = $user_id;
-            $user->imagem = $img_name;
-
-            $destine = 'files/user/'.$user_id.'/'.$img_name;
-
-            if(move_uploaded_file($img_tmp, WWW_ROOT.$destine)){
-                if((!!$old_image) &&  ($old_image != $user->imagem)){
-                    unlink(WWW_ROOT.'files/user/'.$user->id.'/'.$old_image);
-                }
-
-                if($this->Users->save($user)){
-                    if($this->Auth->user('id') === $user->id){
-                        //Atualiza informação pós uplad
-                        $user = $this->Users->get($user_id, [
-                            'contain' => []
-                        ]);
-                        $this->Auth->setUser($user);
-                    }
-                    
-                    $this->Flash->success(__('Imagem atualizada com sucesso.'));
-                    return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
-                }else{
-                    $this->Flash->danger(__('Erro: Imagem não atualizada.'));
-                }
-            }
-        }*/
-
         $this->set(compact('user'));
     }
     /**

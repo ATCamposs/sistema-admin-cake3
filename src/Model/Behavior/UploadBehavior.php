@@ -19,20 +19,34 @@ class UploadBehavior extends Behavior
 
     public function singleUpload(array $file, $destine)
     {
-        echo "uploadBehavior: ". $destine;
-        dd($file);
-
         return $this->upload($file, $destine);
-
     }
 
     protected function upload($file, $destine)
     {
         extract($file);
+        $name = $this->slug($name);
         if(move_uploaded_file($tmp_name, $destine . $name)){
-            return true;
+            return $name;
         }else{
             return false;
         }
+    }
+
+    public function slug($name)
+    {
+        $formato['a'] = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜüÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿRr"!@#$%&*()_-+={[}]/?;:,\\\'<>°ºª';
+        $formato['b'] = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr                                ';
+        $name = strtr(utf8_decode($name), utf8_decode($formato['a']), $formato['b']);
+        $name = str_replace(' ', '-', $name);
+
+        // complexo e pouco efetivo
+        //$name = str_replace(['-----', '----', '---', '--'], '-', $name);
+
+        //atualizado e funcional
+        $name = preg_replace('/--+/', '-', $name);
+        $name = strtolower($name);
+
+        return $name;
     }
 }
