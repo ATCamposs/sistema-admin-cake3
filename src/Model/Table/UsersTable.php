@@ -38,6 +38,8 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        //adição do behavior upload
+        $this->addBehavior('Upload');
     }
 
     /**

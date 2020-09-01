@@ -161,13 +161,23 @@ class UsersController extends AppController
     public function changePictureProfile()
     {
         $user_id = $this->Auth->user('id');
-        $user = $this->Users->get($user_id, [
-            'contain' => []
-        ]);
-
-        $old_image = $user->imagem;
+        $user = $this->Users->get($user_id);
 
         if($this->request->is(['patch', 'post', 'put'])){
+            $user = $this->Users->newEntity();
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            $destine = WWW_ROOT.'files/user/'.$user_id.'/';
+            $user->imagem = $this->Users->singleUpload($this->request->getData()['imagem'], $destine);
+            if($user->imagem){
+                $this->Flash->success(__('Imagem atualizada com sucesso.'));
+            }else{
+                $this->Flash->danger(__('Erro: Imagem não atualizada.'));
+            }
+        }
+
+        //$old_image = $user->imagem;
+
+        /*if($this->request->is(['patch', 'post', 'put'])){
             $img_name = $this->request->getData()['imagem']['name'];
             $img_tmp = $this->request->getData()['imagem']['tmp_name'];
             $users = $this->Users->newEntity();
@@ -196,7 +206,7 @@ class UsersController extends AppController
                     $this->Flash->danger(__('Erro: Imagem não atualizada.'));
                 }
             }
-        }
+        }*/
 
         $this->set(compact('user'));
     }
