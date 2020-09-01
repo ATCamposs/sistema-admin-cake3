@@ -24,8 +24,8 @@
     <dt class="col-sm-3">Imagem</dt>
     <dd class="col-sm-9">
     <?php
-    if(!empty($profileUser['imagem'])){
-        $imagem_usuario = $this->Html->image('../files/user/' . $profileUser['id'] . '/' . $profileUser['imagem'], ['class' => 'rounded-circle', 'width' => 120, 'height' => 120]);
+    if(!empty($user->imagem)){
+        $imagem_usuario = $this->Html->image('../files/user/' . $user->id . '/' . $user->imagem, ['class' => 'rounded-circle', 'width' => 120, 'height' => 120]);
     } else {
         $imagem_usuario = $this->Html->image('../files/user/logo-gato.png');
     }
@@ -35,15 +35,15 @@
     ?>
     </dd>
     <dt class="col-sm-3">ID</dt>
-    <dd class="col-sm-9"><?= $this->Number->format($user['id']) ?></dd>
+    <dd class="col-sm-9"><?= $this->Number->format($user->id) ?></dd>
 
     <dt class="col-sm-3">Nome</dt>
-    <dd class="col-sm-9"><?= h($user['name']) ?></dd>
+    <dd class="col-sm-9"><?= h($user->name) ?></dd>
 
     <dt class="col-sm-3">E-mail</dt>
-    <dd class="col-sm-9"><?= h($user['email']) ?></dd>
+    <dd class="col-sm-9"><?= h($user->email) ?></dd>
 
     <dt class="col-sm-3">Usuário</dt>
-    <dd class="col-sm-9"><?= h($user['username']) ?></dd>
+    <dd class="col-sm-9"><?= h($user->username) ?></dd>
 
 </dl>

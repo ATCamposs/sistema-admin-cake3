@@ -47,7 +47,7 @@ class UsersController extends AppController
 
     public function profile()
     {
-        $user = $this->Auth->user();
+        $user = $this->Users->get($this->Auth->user('id'));
 
         $this->set(compact('user'));
     }
@@ -116,18 +116,11 @@ class UsersController extends AppController
     public function editProfile()
     {
         $user_id = $this->Auth->user('id');
-        $user = $this->Users->get($user_id, [
-            'contain' => []
-        ]);
+        $user = $this->Users->get($user_id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                if($this->Auth->user('id') === $user->id){
-                    $data = $user->toArray();
-                    $this->Auth->setUser($data);
-                }
-
                 $this->Flash->success(__('Perfil editado com sucesso.'));
 
                 return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
@@ -140,8 +133,7 @@ class UsersController extends AppController
 
     public function editPassword()
     {
-        $user_id = $this->Auth->user('id');
-        $user = $this->Users->get($user_id, [
+        $user = $this->Users->get($this->Auth->user('id'), [
             'contain' => []
         ]);
 
