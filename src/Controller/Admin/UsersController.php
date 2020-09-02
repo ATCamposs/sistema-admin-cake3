@@ -176,10 +176,10 @@ class UsersController extends AppController
                 }else{
                     $user->imagem = $old_image;
                     $this->Users->save($user);
-                    $this->Flash->danger(__('Erro: Imagem não atualizada.'));
+                    $this->Flash->danger(__('Erro: Imagem com o mesmo nome.'));
                 }
             }else{
-                $this->Flash->danger(__('Erro: Imagem não atualizada.'));
+                $this->Flash->danger(__('Erro: Use imagens JPEG ou PNG.'));
             }
         }
 

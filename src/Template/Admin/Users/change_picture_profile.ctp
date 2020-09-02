@@ -21,7 +21,7 @@
 <?= $this->Form->create($profile_user, ['enctype' => 'multipart/form-data']) ?>
     <div class='form-row'>
         <div class="form-group col-md-6">
-        <label><span class="text-danger">*</span> Foto ( 150 x 150 )</label>
+        <label><span class="text-danger">*</span> Somente imagens no formato png ou jpeg são aceitas</label>
             <?= $this->Form->control('image', [
             'type' => 'file', 'label' =>false, 'onchange'=>'previewImage()']) ?>
         </div>
@@ -41,7 +41,7 @@
             <span class="text-danger">* </span>Campo obrigatório
         </p>
 <div class="text-center">
-    <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-warning']) ?>
+    <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-warning changePicture']) ?>
 </div>
 
 <?= $this->Form->end() ?>

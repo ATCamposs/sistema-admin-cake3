@@ -23,9 +23,10 @@ function previewImage() {
         preview.src = reader.result;
     };
 
-    if(image){
+    if(image && (image.type == 'image/jpeg' || image.type == 'image/png')){
         reader.readAsDataURL(image);
+        $('.changePicture').prop('disabled', false);
     } else {
-        preview.src = '';
+        $('.changePicture').prop('disabled', true);
     }
 }

@@ -80,7 +80,6 @@ class UsersTable extends Table
             ]);
 
         $validator
-            ->notEmpty('image', 'Necessário selecionar uma imagem')
             ->add('image', 'file', [
                 'rule' => ['mimeType', ['image/jpeg', 'image/png']],
                 'message' => 'Extensão invalida, use JPG ou PNG',
