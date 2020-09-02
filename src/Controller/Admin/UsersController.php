@@ -158,7 +158,7 @@ class UsersController extends AppController
 
         if($this->request->is(['patch', 'post', 'put'])){
             $user = $this->Users->newEntity();
-            $user->imagem = $this->Users->slug($this->request->getData()['image']['name']);
+            $user->imagem = $this->Users->uploadSlug($this->request->getData()['image']['name']);
             $user->id = $user_id;
 
             $user = $this->Users->patchEntity($user, $this->request->getdata());
@@ -172,7 +172,7 @@ class UsersController extends AppController
                         unlink($destine.$old_image);
                     }
                         $this->Flash->success(__('Imagem atualizada com sucesso.'));
-                        return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
+                        //return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
                 }else{
                     $user->imagem = $old_image;
                     $this->Users->save($user);
