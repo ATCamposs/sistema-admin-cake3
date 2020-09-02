@@ -25,7 +25,7 @@ class UploadBehavior extends Behavior
     protected function upload($file, $destine)
     {
         extract($file);
-        $name = $this->slug($name);
+        //$name = $this->slug($name);
         if(move_uploaded_file($tmp_name, $destine . $name)){
             return $name;
         }else{
@@ -35,9 +35,9 @@ class UploadBehavior extends Behavior
 
     public function slug($name)
     {
-        $formato['a'] = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜüÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿRr"!@#$%&*()_-+={[}]/?;:,\\\'<>°ºª';
-        $formato['b'] = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr                                ';
-        $name = strtr(utf8_decode($name), utf8_decode($formato['a']), $formato['b']);
+        $format['a'] = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜüÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿRr"!@#$%&*()_-+={[}]/?;:,\\\'<>°ºª';
+        $format['b'] = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr                                ';
+        $name = strtr(utf8_decode($name), utf8_decode($format['a']), $format['b']);
         $name = str_replace(' ', '-', $name);
 
         // complexo e pouco efetivo

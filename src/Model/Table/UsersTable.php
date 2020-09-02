@@ -57,30 +57,33 @@ class UsersTable extends Table
         $validator
             ->scalar('name')
             ->maxLength('name', 220)
-            ->requirePresence('name', 'create')
             ->notEmpty('name');
 
         $validator
             ->email('email')
-            ->requirePresence('email', 'create')
             ->notEmpty('email');
 
         $validator
             ->scalar('username')
             ->maxLength('username', 220)
-            ->requirePresence('username', 'create')
             ->notEmpty('username');
 
         $validator
             ->scalar('password')
             ->maxLength('password', 220)
-            ->requirePresence('password', 'create')
             ->notEmpty('password')
             ->add('password', [
                     'length' => [
                         'rule' => ['minlength', 6],
                         'message' => 'A senha deve ter no mínimo 6 caracteres',
                     ]
+            ]);
+
+        $validator
+            ->notEmpty('image', 'Necessário selecionar uma imagem')
+            ->add('image', 'file', [
+                'rule' => ['mimeType', ['image/jpeg', 'image/png']],
+                'message' => 'Extensão invalida, use JPG ou PNG',
             ]);
 
         return $validator;

@@ -1,8 +1,8 @@
 <?php 
-    $primeiro_nome = str_word_count($profileUser->name) >= 2 ? current(str_word_count($profileUser->name, 2)) : $profileUser->name;
+    $primeiro_nome = str_word_count($profile_user->name) >= 2 ? current(str_word_count($profile_user->name, 2)) : $profile_user->name;
 
-    if(!empty($profileUser->imagem)){
-        $imagem_usuario = $this->Html->image('../files/user/' . $profileUser->id . '/' . $profileUser->imagem, ['class' => 'rounded-circle', 'width' => 20, 'height' => 20]);
+    if(!empty($profile_user->imagem)){
+        $imagem_usuario = $this->Html->image('../files/user/' . $profile_user->id . '/' . $profile_user->imagem, ['class' => 'rounded-circle', 'width' => 20, 'height' => 20]);
     } else {
         $imagem_usuario = $this->Html->image('../files/user/logo-gato.png');
     }

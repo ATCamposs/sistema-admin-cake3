@@ -75,12 +75,12 @@ class AppController extends Controller
             ($this->request->getParam(['action']) == 'login')){
                 $this->viewBuilder()->setLayout('login');
             } else {
-                //$profileUser = $this->Auth->user();
+                //$profile_user = $this->Auth->user();
                 $user_id = $this->Auth->user('id');
                 $this->loadModel('Users');
-                $profileUser = $this->Users->getUserData($this->Auth->user('id'));
+                $profile_user = $this->Users->getUserData($this->Auth->user('id'));
 
-                $this->set(compact('profileUser'));
+                $this->set(compact('profile_user'));
 
                 $this->viewBuilder()->setLayout('admin');
             }

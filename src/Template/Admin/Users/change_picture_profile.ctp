@@ -18,22 +18,22 @@
 </div><hr>
 <?= $this->Flash->render() ?>
 
-<?= $this->Form->create($user, ['enctype' => 'multipart/form-data']) ?>
+<?= $this->Form->create($profile_user, ['enctype' => 'multipart/form-data']) ?>
     <div class='form-row'>
         <div class="form-group col-md-6">
         <label><span class="text-danger">*</span> Foto ( 150 x 150 )</label>
-            <?= $this->Form->file('imagem', [
-            'label' =>false, 'onchange'=>'previewImage()']) ?>
+            <?= $this->Form->control('image', [
+            'type' => 'file', 'label' =>false, 'onchange'=>'previewImage()']) ?>
         </div>
         <div class="form-group col-md-6">
             <?php
-                if(!!$user->imagem){
-                    $old_image = '../../files/user/'.$user->id.'/'.$user->imagem;
+                if(!!$profile_user->imagem){
+                    $old_image = '../../files/user/'.$profile_user->id.'/'.$profile_user->imagem;
                 }else{
                     $old_image = '../../files/user/logo-gato.png';
                 }
             ?>
-            <img src='<?= $old_image ?>' alt='<?= $user->name ?>' class='img-thumbnail' id='preview-img' style='width: 150px; height: 150px;'>
+            <img src='<?= $old_image ?>' alt='<?= $profile_user->name ?>' class='img-thumbnail' id='preview-img' style='width: 150px; height: 150px;'>
         </div>
     </div>
 
