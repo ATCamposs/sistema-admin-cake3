@@ -157,6 +157,33 @@ class UsersController extends AppController
         $old_image = $user->imagem;
 
         if($this->request->is(['patch', 'post', 'put'])){
+            $user = $this->Users->newEntity();
+            $user->imagem = $this->Users->slug($this->request->getData()['image']['name']);
+            $user->id = $user_id;
+
+            $user = $this->Users->patchEntity($user, $this->request->getdata());
+            if($this->Users->save($user)){
+                $destine = WWW_ROOT.'files/user/'.$user_id.'/';
+                $imgUpload = $this->request->getData()['image'];
+                $imgUpload['name'] = $user->imagem;
+
+                if($user->imagem = $this->Users->singleUpload($imgUpload, $destine)){
+                    if((!!$old_image) &&  ($old_image != $user->imagem)){
+                        unlink($destine.$old_image);
+                    }
+                        $this->Flash->success(__('Imagem atualizada com sucesso.'));
+                        return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
+                }else{
+                    $user->imagem = $old_image;
+                    $this->Users->save($user);
+                    $this->Flash->danger(__('Erro: Imagem não atualizada.'));
+                }
+            }else{
+                $this->Flash->danger(__('Erro: Imagem não atualizada.'));
+            }
+        }
+
+        /*if($this->request->is(['patch', 'post', 'put'])){
             //newEntity tem que ser chamado depois de patchEntity
             $user = $this->Users->patchEntity($user, $this->request->data);
             $destine = WWW_ROOT.'files/user/'.$user_id.'/';
@@ -178,7 +205,7 @@ class UsersController extends AppController
             }else{
                 $this->Flash->danger(__('Erro: Imagem não atualizada.'));
             }
-        }
+        }*/
         $this->set(compact('user'));
     }
     /**
