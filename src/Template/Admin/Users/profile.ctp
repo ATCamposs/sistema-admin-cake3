@@ -46,8 +46,8 @@
             ?>
             <?= $imagem_usuario ?>
         </div>
-
     </dd>
+    
     <dt class="col-sm-3">ID</dt>
     <dd class="col-sm-9"><?= $this->Number->format($user->id) ?></dd>
 
