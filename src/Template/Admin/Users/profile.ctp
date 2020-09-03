@@ -32,7 +32,7 @@
                 "<i class='fas fa-pencil-alt'></i>",
                 [
                     'controller' => 'Users',
-                    'action' => ' changePictureProfile'
+                    'action' => 'changePictureProfile'
                 ],
                 [
                     'escape' => false

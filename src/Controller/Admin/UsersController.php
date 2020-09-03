@@ -89,7 +89,7 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Usuário editado com sucesso.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Users', 'action' => 'view', $id]);
             }
             $this->Flash->danger(__('ERRO: Alterações não puderam ser salvas.'));
         }
@@ -172,7 +172,7 @@ class UsersController extends AppController
                         unlink($destine.$old_image);
                     }
                         $this->Flash->success(__('Imagem atualizada com sucesso.'));
-                        //return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
+                        return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
                 }else{
                     $user->imagem = $old_image;
                     $this->Users->save($user);
@@ -182,30 +182,40 @@ class UsersController extends AppController
                 $this->Flash->danger(__('Erro: Use imagens JPEG ou PNG.'));
             }
         }
+        $this->set(compact('user'));
+    }
 
-        /*if($this->request->is(['patch', 'post', 'put'])){
-            //newEntity tem que ser chamado depois de patchEntity
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            $destine = WWW_ROOT.'files/user/'.$user_id.'/';
+    public function changePictureUser($id = null)
+    {
+        $user = $this->Users->get($id);
+        $old_image = $user->imagem;
+
+        if($this->request->is(['patch', 'post', 'put'])){
             $user = $this->Users->newEntity();
-            $user->imagem = $this->Users->singleUpload($this->request->getData()['imagem'], $destine);
-            if($user->imagem){
-                $user->id = $user_id;
-                if($this->Users->save($user)){
-                    if($this->Auth->user('id') === $user->id){
-                        //Atualiza informação pós uplad
-                        $this->Auth->setUser($user);
-                    }
-                    $this->Flash->success(__('Imagem atualizada com sucesso.'));
+            $user->imagem = $this->Users->uploadSlug($this->request->getData()['image']['name']);
+            $user->id = $id;
+
+            $user = $this->Users->patchEntity($user, $this->request->getdata());
+            if($this->Users->save($user)){
+                $destine = WWW_ROOT.'files/user/'.$id.'/';
+                $imgUpload = $this->request->getData()['image'];
+                $imgUpload['name'] = $user->imagem;
+
+                if($user->imagem = $this->Users->singleUpload($imgUpload, $destine)){
                     if((!!$old_image) &&  ($old_image != $user->imagem)){
                         unlink($destine.$old_image);
-                        return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
                     }
+                        $this->Flash->success(__('Imagem atualizada com sucesso.'));
+                        return $this->redirect(['controller' => 'Users', 'action' => 'view', $id]);
+                }else{
+                    $user->imagem = $old_image;
+                    $this->Users->save($user);
+                    $this->Flash->danger(__('Erro: Imagem com o mesmo nome.'));
                 }
             }else{
-                $this->Flash->danger(__('Erro: Imagem não atualizada.'));
+                $this->Flash->danger(__('Erro: Use imagens JPEG ou PNG.'));
             }
-        }*/
+        }
         $this->set(compact('user'));
     }
     /**
