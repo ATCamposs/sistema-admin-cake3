@@ -227,7 +227,7 @@ class UsersController extends AppController
 
         if($this->request->is(['patch', 'post', 'put'])){
             $user = $this->Users->newEntity();
-            $user->imagem = $this->Users->uploadSlug($this->request->getData()['image']['name']);
+            $user->imagem = $this->Users->uploadSlugImgRed($this->request->getData()['image']['name']);
             $user->id = $id;
 
             $user = $this->Users->patchEntity($user, $this->request->getdata());
@@ -236,7 +236,7 @@ class UsersController extends AppController
                 $imgUpload = $this->request->getData()['image'];
                 $imgUpload['name'] = $user->imagem;
 
-                if($user->imagem = $this->Users->singleUpload($imgUpload, $destine)){
+                if($user->imagem = $this->Users->singleUploadImgRed($imgUpload, $destine, 150, 150)){
                     if((!!$old_image) &&  ($old_image != $user->imagem)){
                         unlink($destine.$old_image);
                     }

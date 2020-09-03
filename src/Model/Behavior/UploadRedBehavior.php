@@ -24,8 +24,11 @@ class UploadRedBehavior extends Behavior
         $this->createDirectoryImgRed($destine);
 
         $this->checkImageType($file, $destine, $width, $height);
+        //retornaria imagem original
         //return $this->upload($file, $destine);
-        return false;
+        
+        //retorna imagem redimensionada
+        return true;
     }
 
     public function checkImageType($file, $destine, $width, $height)
@@ -34,19 +37,32 @@ class UploadRedBehavior extends Behavior
         switch ($type) {
             case 'image/jpeg';
             case 'image/pjpeg';
-
-                echo "img jpeg";
+                $image = imagecreatefromjpeg($tmp_name);
+                $imageResized = $this->resizeImage($image, $width, $height);
+                imagejpeg($imageResized, $destine.$name);
                 break;
             case 'image/png';
             case 'image/x-png';
-
-                echo "img PNG";
+                $image = imagecreatefrompng($tmp_name);
+                $imageResized = $this->resizeImage($image, $width, $height);
+                imagepng($imageResized, $destine.$name);
                 break;
 
         }
     }
+    protected function resizeImage($image, $width, $height)
+    {
+        $original_width = imagesx($image);
+        $original_height = imagesy($image);
+        
+        $imageResized = imagecreatetruecolor($width, $height);
 
-    public function createDirectoryImgRed($destine)
+        imagecopyresampled($imageResized, $image, 0, 0, 0, 0, $width, $height, $original_width, $original_height);
+        
+        return $imageResized;
+    }
+
+    protected function createDirectoryImgRed($destine)
     {
         $dir = new Folder($destine);
 
