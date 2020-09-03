@@ -40,6 +40,7 @@ class UsersTable extends Table
         $this->addBehavior('Timestamp');
         //adição do behavior upload
         $this->addBehavior('Upload');
+        $this->addBehavior('UploadRed');
     }
 
     /**

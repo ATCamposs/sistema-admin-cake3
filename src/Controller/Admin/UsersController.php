@@ -149,8 +149,8 @@ class UsersController extends AppController
 
         $this->set(compact('user'));
     }
-
-    public function changePictureProfile()
+    //UPLOAD QUE NAO REDIMENSIONA IMAGENS
+    /*public function changePictureProfile()
     {
         $user_id = $this->Auth->user('id');
         $user = $this->Users->get($user_id);
@@ -168,6 +168,41 @@ class UsersController extends AppController
                 $imgUpload['name'] = $user->imagem;
 
                 if($user->imagem = $this->Users->singleUpload($imgUpload, $destine)){
+                    if((!!$old_image) &&  ($old_image != $user->imagem)){
+                        unlink($destine.$old_image);
+                    }
+                        $this->Flash->success(__('Imagem atualizada com sucesso.'));
+                        return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
+                }else{
+                    $user->imagem = $old_image;
+                    $this->Users->save($user);
+                    $this->Flash->danger(__('Erro: Imagem com o mesmo nome.'));
+                }
+            }else{
+                $this->Flash->danger(__('Erro: Use imagens JPEG ou PNG.'));
+            }
+        }
+        $this->set(compact('user'));
+    }*/
+
+    public function changePictureProfile()
+    {
+        $user_id = $this->Auth->user('id');
+        $user = $this->Users->get($user_id);
+        $old_image = $user->imagem;
+
+        if($this->request->is(['patch', 'post', 'put'])){
+            $user = $this->Users->newEntity();
+            $user->imagem = $this->Users->uploadSlugImgRed($this->request->getData()['image']['name']);
+            $user->id = $user_id;
+
+            $user = $this->Users->patchEntity($user, $this->request->getdata());
+            if($this->Users->save($user)){
+                $destine = WWW_ROOT.'files/user/'.$user_id.'/';
+                $imgUpload = $this->request->getData()['image'];
+                $imgUpload['name'] = $user->imagem;
+
+                if($user->imagem = $this->Users->singleUploadImgRed($imgUpload, $destine, 150, 150)){
                     if((!!$old_image) &&  ($old_image != $user->imagem)){
                         unlink($destine.$old_image);
                     }
