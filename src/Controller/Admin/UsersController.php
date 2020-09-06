@@ -317,7 +317,7 @@ class UsersController extends AppController
 
                 $this->Flash->success(__('Usuário cadastrado com sucesso.'));
 
-                //return $this->redirect(['controller' =>'Users', 'action' => 'login']);
+                return $this->redirect(['controller' =>'Users', 'action' => 'login']);
             }
             $this->Flash->danger(__('ERRO: O usuário não pode ser salvo.'));
         }
