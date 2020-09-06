@@ -203,11 +203,9 @@ class UsersController extends AppController
                 $imgUpload['name'] = $user->imagem;
 
                 if($user->imagem = $this->Users->singleUploadImgRed($imgUpload, $destine, 150, 150)){
-                    if((!!$old_image) &&  ($old_image != $user->imagem)){
-                        unlink($destine.$old_image);
-                    }
-                        $this->Flash->success(__('Imagem atualizada com sucesso.'));
-                        return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
+                    $this->Users->deleteProfileImage($destine, $old_image, $user->imagem);
+                    $this->Flash->success(__('Imagem atualizada com sucesso.'));
+                    return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
                 }else{
                     $user->imagem = $old_image;
                     $this->Users->save($user);
@@ -237,11 +235,9 @@ class UsersController extends AppController
                 $imgUpload['name'] = $user->imagem;
 
                 if($user->imagem = $this->Users->singleUploadImgRed($imgUpload, $destine, 150, 150)){
-                    if((!!$old_image) &&  ($old_image != $user->imagem)){
-                        unlink($destine.$old_image);
-                    }
-                        $this->Flash->success(__('Imagem atualizada com sucesso.'));
-                        return $this->redirect(['controller' => 'Users', 'action' => 'view', $id]);
+                    $this->Users->deleteProfileImage($destine, $old_image, $user->imagem);
+                    $this->Flash->success(__('Imagem atualizada com sucesso.'));
+                    return $this->redirect(['controller' => 'Users', 'action' => 'view', $id]);
                 }else{
                     $user->imagem = $old_image;
                     $this->Users->save($user);
@@ -264,6 +260,10 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+        $destine = WWW_ROOT.'files/user/'.$user->id.'/';
+
+        $this->Users->deleteFile($destine);
+
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('Usuário deletado com sucesso.'));
         } else {

@@ -41,6 +41,7 @@ class UsersTable extends Table
         //adição do behavior upload
         $this->addBehavior('Upload');
         $this->addBehavior('UploadRed');
+        $this->addBehavior('DeleteFile');
     }
 
     /**
