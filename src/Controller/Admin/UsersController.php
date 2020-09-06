@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Users Controller
@@ -12,6 +13,12 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+    
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['cadastrar', 'logout']);
+    }
 
     /**
      * Index method
@@ -290,5 +297,20 @@ class UsersController extends AppController
     {
         $this->Flash->success(__('Deslogado com sucesso.'));
         return $this->redirect($this->Auth->logout());
+    }
+
+    public function cadastrar()
+    {
+        $user = $this->Users->newEntity();
+        if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('Usuário cadastrado com sucesso.'));
+
+                return $this->redirect(['controller' =>'Users', 'action' => 'login']);
+            }
+            $this->Flash->danger(__('ERRO: O usuário não pode ser salvo.'));
+        }
+        $this->set(compact('user'));
     }
 }
