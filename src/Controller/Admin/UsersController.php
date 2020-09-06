@@ -3,6 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\Mailer\Email;
 
 /**
  * Users Controller
@@ -305,9 +306,18 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
+                $email = new Email('Smtp');
+                
+                $msg = 'Caro(a) ' . $user->name . '<br><br> Obrigado pelo cadastro.<br><br>';
+                $email->setTo('you@example.com')
+                ->setProfile('Smtp')
+                ->setEmailFormat('html')
+                ->setSubject('Usuário cadastrado com Sucesso')
+                ->send($msg);
+
                 $this->Flash->success(__('Usuário cadastrado com sucesso.'));
 
-                return $this->redirect(['controller' =>'Users', 'action' => 'login']);
+                //return $this->redirect(['controller' =>'Users', 'action' => 'login']);
             }
             $this->Flash->danger(__('ERRO: O usuário não pode ser salvo.'));
         }
