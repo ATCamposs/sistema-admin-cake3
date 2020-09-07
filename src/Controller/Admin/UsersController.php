@@ -21,7 +21,7 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        $this->Auth->allow(['cadastrar', 'logout', 'confEmail', 'recoveryPassword']);
+        $this->Auth->allow(['cadastrar', 'logout', 'confEmail', 'recoveryPassword', 'updatePassword']);
     }
 
     /**
@@ -142,6 +142,30 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
+    public function updatePassword($recovery_password = null)
+    {
+        $userTable = TableRegistry::get('Users');
+        $user = $userTable->getUpdatePassword($recovery_password);
+        if($user){
+            
+            $this->set(compact('user'));
+
+            if($this->request->is(['patch', 'post', 'put'])){
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                $user->recovery_password = null;
+                if($this->Users->save($user)){
+                    $this->Flash->success(__('Senha alterada com sucesso.'));
+                    return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+                }else{
+                    $this->Flash->danger(__('Erro: A senha não foi alterada.'));
+                }
+            }
+        }else{
+            $this->Flash->danger(__('ERRO: Link inválido.'));
+            return $this->redirect(['controller' => 'Users', 'action' => 'recoveryPassword']);
+        }
+    }
+
     public function editPassword()
     {
         $user = $this->Users->get($this->Auth->user('id'), [
@@ -172,7 +196,7 @@ class UsersController extends AppController
 
                 if(!$recoveryPass->recovery_password){
                     $user->id = $recoveryPass->id;
-                    $user->recovery_password = Security::hash($this->request->getData()['email'] . $recoveryPass->id, 'sha256', false);
+                    $user->recovery_password = Security::hash($this->request->getData()['email'] . $recoveryPass->id . date("Y-m-d H:i:s"), 'sha256', false);
                     $userTable->save($user);
                     $recoveryPass->recovery_password = $user->recovery_password;
                 }

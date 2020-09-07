@@ -23,10 +23,10 @@
     <label>Senha</label>
         <?= $this->Form->control('password', ['class' => 'form-control', 'placeholder' => 'Digite a senha', 'label' => false]);?>
     </div>
-    <?= $this->Form->button(__('Cadastrar'), ['class' => 'btn btn-success']) ?>
-
+    <?= $this->Form->button(__('Cadastrar'), ['class' => 'btn btn-success btn-block']) ?>
+<br>
     <p class="text-center">
     <?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']) ?> -
-    Esqueceu sua senha ?</p>
+    <?= $this->Html->link(__('Esqueceu sua senha ?'), ['controller' => 'Users', 'action' => 'recoveryPassword']) ?>
     
 <?= $this->Form->end() ?>

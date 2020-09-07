@@ -14,8 +14,8 @@
     <label>Senha</label>
         <?= $this->Form->control('password', ['class' => 'form-control', 'placeholder' => 'Digite a senha', 'label' => false]);?>
     </div>
-    <?= $this->Form->button(__('Acessar'), ['class' => 'btn btn-primary']) ?>
-
+    <?= $this->Form->button(__('Acessar'), ['class' => 'btn btn-primary btn-block']) ?>
+<br>
     <p class="text-center">
         <?= $this->Html->link(__('Cadastrar'), ['controller' => 'Users', 'action' => 'cadastrar']) ?> -
         <?= $this->Html->link(__('Esqueceu sua senha ?'), ['controller' => 'Users', 'action' => 'recoveryPassword']) ?>

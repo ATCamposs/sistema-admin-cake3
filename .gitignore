@@ -5,7 +5,7 @@
 /logs/*
 /tmp/*
 /vendor/*
-
+/modelo_layout_site/*
 # OS generated files #
 ######################
 .DS_Store

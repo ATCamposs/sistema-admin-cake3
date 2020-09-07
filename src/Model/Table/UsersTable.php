@@ -125,6 +125,16 @@ class UsersTable extends Table
         return $query->first();
     }
 
+    public function getUpdatePassword($recovery_password)
+    {
+        $query = $this->find()
+                        ->select(['id'])
+                        ->where([
+                        'Users.recovery_password' => $recovery_password
+                        ]);
+        return $query->first();
+    }
+
     public function getRecoveryPassword($email)
     {
         $query = $this->find()

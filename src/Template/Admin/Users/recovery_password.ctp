@@ -6,12 +6,12 @@
 
     <div class="form-group">
     <label>E-mail</label>
-        <?= $this->Form->control('email', ['class' => 'form-control', 'placeholder' => 'E-mail', 'label' => false]);
+        <?= $this->Form->control('email', ['class' => 'form-control', 'placeholder' => 'E-mail cadastrado', 'label' => false]);
         ?>
     </div>
 
-    <?= $this->Form->button(__('Recuperar senha'), ['class' => 'btn btn-warning']) ?>
-
+    <?= $this->Form->button(__('Recuperar senha'), ['class' => 'btn btn-warning btn-block']) ?>
+<br>
     <p class="text-center">
     <?= $this->Html->link(__('Clique aqui para acessar'), ['controller' => 'Users', 'action' => 'login']) ?>
     </p>
