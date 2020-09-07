@@ -4,7 +4,6 @@
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>
-        <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
@@ -21,9 +20,10 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    
+    <?= $this->element('menu_site') ?>
     <?= $this->Flash->render() ?>
     <?= $this->fetch('content') ?>
+    <?= $this->element('footer') ?>
 
 <?= $this->Html->script([
     'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js',
