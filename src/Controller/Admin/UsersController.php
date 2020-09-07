@@ -167,12 +167,18 @@ class UsersController extends AppController
         if($this->request->is('post')){
             $userTable = TableRegistry::get('Users');
             $recoveryPass = $userTable->getRecoveryPassword($this->request->getData()['email']);
+
             if($recoveryPass){
+
                 if(!$recoveryPass->recovery_password){
                     $user->id = $recoveryPass->id;
                     $user->recovery_password = Security::hash($this->request->getData()['email'] . $recoveryPass->id, 'sha256', false);
                     $userTable->save($user);
+                    $recoveryPass->recovery_password = $user->recovery_password;
                 }
+                $recoveryPass->host_name = Router::fullBaseUrl().$this->request->getAttribute('webroot').$this->request->getParam('prefix');
+                $this->getMailer('User')->send('recoveryPassword', [$recoveryPass]);
+
                 $this->Flash->success(__('Email enviado com sucesso'));
                 return $this->redirect(['controller' => 'Users', 'action' => 'login']);
             }else{
