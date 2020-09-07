@@ -18,7 +18,7 @@ class HomeController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        //$this->Auth->allow([]);
+        $this->Auth->allow(['index']);
     }
 
     /**
@@ -28,13 +28,9 @@ class HomeController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'limit' => 40
-        ];
+        $home = "Bem vindo";
 
-        $users = $this->paginate($this->Users);
-
-        $this->set(compact('users'));
+        $this->set(compact('home'));
     }
 
 }

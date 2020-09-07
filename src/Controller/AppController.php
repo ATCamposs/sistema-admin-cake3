@@ -87,6 +87,8 @@ class AppController extends Controller
 
                 $this->viewBuilder()->setLayout('admin');
             }
+        }else{
+            $this->viewBuilder()->setLayout('site');
         }
     }
 }
