@@ -19,12 +19,12 @@ class UserMailer extends Mailer
     public function userDataRegistry($user)
     {
         
-        $$this->setTo($user->email)
+        $this->setTo($user->email)
         ->setProfile('Smtp')
         ->setEmailFormat('html')
         ->setTemplate('welcome')
         ->setLayout('user')
-        ->setViewVars(['name' => $user->name])
+        ->setViewVars(['name' => $user->name, 'cod_val_email' => $user->cod_val_email, 'host_name' => $user->host_name])
         ->setSubject('Usuário cadastrado com Sucesso');
     }
     

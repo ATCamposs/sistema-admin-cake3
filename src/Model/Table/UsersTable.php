@@ -114,4 +114,15 @@ class UsersTable extends Table
                         ]);
         return $query->first();
     }
+
+    public function confEmail($cod_val_email)
+    {
+        $query = $this->find()
+                        ->select(['id'])
+                        ->where([
+                        'Users.cod_val_email' => $cod_val_email
+                        ]);
+        return $query->first();
+    }
+
 }
