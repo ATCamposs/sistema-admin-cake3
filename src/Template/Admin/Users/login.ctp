@@ -18,6 +18,7 @@
 
     <p class="text-center">
         <?= $this->Html->link(__('Cadastrar'), ['controller' => 'Users', 'action' => 'cadastrar']) ?> -
-    Esqueceu sua senha ?</p>
+        <?= $this->Html->link(__('Esqueceu sua senha ?'), ['controller' => 'Users', 'action' => 'recoveryPassword']) ?>
+    </p>
     
 <?= $this->Form->end() ?>
