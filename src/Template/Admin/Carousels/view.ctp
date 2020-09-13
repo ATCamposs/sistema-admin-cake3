@@ -5,11 +5,8 @@
     <div class="p-2">
         <span class="d-none d-md-block">
             <?= $this->Html->link(__('Listar'), ['controller' => 'Carousels', 'action' => 'index'], ['class' => 'btn btn-outline-info btn-sm']) ?>
-
             <?= $this->Html->link(__('Editar'), ['controller' => 'Carousels', 'action' => 'edit', $carousel->id], ['class' => 'btn btn-outline-warning btn-sm']) ?>
-
             <?= $this->Form->postLink(__('Apagar'), ['controller' => 'Carousels', 'action' => 'delete', $carousel->id], ['class' => 'btn btn-outline-danger btn-sm', 'confirm' => __('Relamente deseja apagar o carousel # {0}?', $carousel->id)]) ?>
-
         </span>
         <div class="dropdown d-block d-md-none">
             <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -17,9 +14,7 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
                 <?= $this->Html->link(__('Listar'), ['controller' => 'Carousels', 'action' => 'index'], ['class' => 'dropdown-item']) ?>
-
                 <?= $this->Html->link(__('Editar'), ['controller' => 'Carousels', 'action' => 'edit', $carousel->id], ['class' => 'dropdown-item']) ?>
-
                 <?= $this->Form->postLink(__('Apagar'), ['controller' => 'Carousels', 'action' => 'delete', $carousel->id], ['class' => 'dropdown-item', 'confirm' => __('Relamente deseja apagar o carousel # {0}?', $user->id)]) ?>                                    
             </div>
         </div>
@@ -29,7 +24,7 @@
 <dl class="row">
     <dt class="col-sm-3">Imagem</dt>
     <dd class="col-sm-9">
-        <div class="img-perfil">
+        <div class="img-profile">
             <?php if(!empty($carousel->imagem)){ ?>
                 <?= $this->Html->image('../files/carousel/'.$carousel->id.'/'.$carousel->imagem, ['width' => '250', 'height' => '120']) ?>&nbsp;
                 
@@ -38,7 +33,7 @@
                         '<i class="fas fa-pencil-alt"></i>',
                         [
                             'controller' => 'Carousels',
-                            'action' => 'alterarFotoCarousel',
+                            'action' => 'changeCarouselImage',
                             $carousel->id
                         ],
                         [
@@ -55,7 +50,7 @@
                         '<i class="fas fa-pencil-alt"></i>',
                         [
                             'controller' => 'Carousels',
-                            'action' => 'alterarFotoCarousel',
+                            'action' => 'changeCarouselImage',
                             $carousel->id
                         ],
                         [

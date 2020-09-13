@@ -42,6 +42,10 @@ class CarouselsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        //adição do behavior upload
+        $this->addBehavior('Upload');
+        $this->addBehavior('UploadRed');
+        $this->addBehavior('DeleteFile');
 
         $this->belongsTo('Positions', [
             'foreignKey' => 'position_id',
@@ -71,14 +75,14 @@ class CarouselsTable extends Table
         $validator
             ->scalar('nome_carousel')
             ->maxLength('nome_carousel', 220)
-            ->requirePresence('nome_carousel', 'create')
-            ->notEmpty('nome_carousel');
+            ->notEmpty('nome_carousel', 'Nome do carousel é obrigatório');
 
         $validator
-            ->scalar('imagem')
-            ->maxLength('imagem', 220)
-            ->requirePresence('imagem', 'create')
-            ->notEmpty('imagem');
+            ->notEmpty('imagem', 'Necessário selecionar a foto')
+            ->add('imagem', 'file', [
+                'rule' => ['mimeType', ['image/jpeg', 'image/png']],
+                'message' => 'Extensão da foto inválida. Selecione foto JPEG ou PNG',
+            ]);
 
         $validator
             ->scalar('titulo')
@@ -100,11 +104,6 @@ class CarouselsTable extends Table
             ->maxLength('link', 220)
             ->allowEmpty('link');
 
-        $validator
-            ->integer('ordem')
-            ->requirePresence('ordem', 'create')
-            ->notEmpty('ordem');
-
         return $validator;
     }
 
@@ -122,5 +121,13 @@ class CarouselsTable extends Table
         $rules->add($rules->existsIn(['situation_id'], 'Situations'));
 
         return $rules;
+    }
+
+    public function getLastSlide()
+    {
+        $query = $this->find()
+                    ->select(['id', 'ordem'])
+                    ->order(['Carousels.ordem' => 'DESC']);
+        return $query->first();
     }
 }
