@@ -3,8 +3,6 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
-use Cake\ORM\TableRegistry;
-use Cake\ORM\Locator\TableLocator;
 
 /**
  * Carousels Controller
@@ -24,7 +22,8 @@ class CarouselsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Positions', 'Colors', 'Situations']
+            'contain' => ['Positions', 'Colors', 'Situations'],
+            'order' => ['Carousels.ordem' => 'ASC']
         ];
         $carousels = $this->paginate($this->Carousels);
 
@@ -170,7 +169,19 @@ class CarouselsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $carousel = $this->Carousels->get($id);
-        if ($this->Carousels->delete($carousel)) {
+        $destine = WWW_ROOT . "files" . DS . "carousel" . DS . $carousel->id . DS;
+        
+        $this->Carousels->deleteFile($destine);
+
+        $carouselTable = $this->getTableLocator()->get('Carousels');
+        $listNextSlide = $carouselTable->getListNextSlide($carousel->ordem);
+
+        if($this->Carousels->delete($carousel)){
+            foreach($listNextSlide as $nextSlide){
+                $carousel->ordem = $nextSlide->ordem - 1;
+                $carousel->id = $nextSlide->id;
+                $this->Carousels->save($carousel);
+            }
             $this->Flash->success(__('The carousel has been deleted.'));
         } else {
             $this->Flash->error(__('The carousel could not be deleted. Please, try again.'));
