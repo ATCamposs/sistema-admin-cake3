@@ -23,7 +23,7 @@
           echo '<div class="carousel-item">';
         }
         
-        echo $this->Html->image('../files/carousel/'.$carousel->id . '/'.$carousel->imagem, ['class' => 'first-slide img-fluid col', 'alt' => 'First slide']);
+        echo $this->Html->image('../files/carousel/'.$carousel->id . '/'.$carousel->imagem, ['class' => 'first-slide bg img-fluid col', 'alt' => 'First slide']);
         echo '<div class="container">';
         echo '<div class="carousel-caption '.$carousel->position->posicao.'">';
         if($carousel->titulo != ""){

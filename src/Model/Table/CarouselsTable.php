@@ -143,7 +143,7 @@ class CarouselsTable extends Table
     public function getShowSlidesHome()
     {
         $query = $this->find()
-                    ->select(['id', 'imagem', 'descricao', 'titulo_botao', 'link', 'ordem', 'position_id', 'color_id', 'Positions.posicao', 'Colors.cor'])
+                    ->select(['id', 'imagem', 'titulo', 'descricao', 'titulo_botao', 'link', 'ordem', 'position_id', 'color_id', 'Positions.posicao', 'Colors.cor'])
                     ->contain(['Positions', 'Colors', 'Situations'])
                     ->where(['Carousels.situation_id =' => 1])
                     ->order(['Carousels.ordem' => 'ASC']);
