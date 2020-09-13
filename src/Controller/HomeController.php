@@ -28,9 +28,11 @@ class HomeController extends AppController
      */
     public function index()
     {
-        $home = "Bem vindo";
+        $carouselTable = TableRegistry::get('Carousels');
+        $carousels = $carouselTable->getShowSlidesHome();
+        
 
-        $this->set(compact('home'));
+        $this->set(compact('carousels'));
     }
 
 }
