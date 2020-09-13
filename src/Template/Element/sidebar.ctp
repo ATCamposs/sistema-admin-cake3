@@ -27,6 +27,18 @@
             </li>
             <li>
             <?= $this->Html->link(
+                    '<i class="fas fa-sliders-h"></i> Carousels',
+                    [
+                        'controller' => 'Carousels',
+                        'action' => 'index'
+                    ],
+                    [
+                        'escape' => false
+                    ]
+                ) ?>
+            </li>
+            <li>
+            <?= $this->Html->link(
                     '<i class="fas fa-sign-out-alt"></i> Sair',
                     [
                         'controller' => 'Users',

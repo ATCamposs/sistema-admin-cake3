@@ -1,75 +1,62 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Carousel[]|\Cake\Collection\CollectionInterface $carousels
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Carousel'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Positions'), ['controller' => 'Positions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Position'), ['controller' => 'Positions', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Colors'), ['controller' => 'Colors', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Color'), ['controller' => 'Colors', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Situations'), ['controller' => 'Situations', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Situation'), ['controller' => 'Situations', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="carousels index large-9 medium-8 columns content">
-    <h3><?= __('Carousels') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<div class="d-flex">
+    <div class="mr-auto p-2">
+        <h2 class="display-4 titulo">Listar Carousels</h2>
+    </div>
+
+        <div class="p-2">
+            <?= $this->Html->link(__('Cadastrar'),
+            ['controller' => 'Carousels', 'action' => 'add'],
+            ['class' => 'btn btn-outline-success btn-sm']);
+            ?>
+        </div>
+
+</div>
+<?= $this->Flash->render() ?>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('nome_carousel') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('imagem') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('titulo') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('descricao') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('titulo_botao') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('link') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('ordem') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('position_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('color_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('situation_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th>ID</th>
+                <th>Nome</th>
+                <th class="d-none d-sm-table-cell">Ordem</th>
+                <th class="d-none d-lg-table-cell">Situação</th>
+                <th class="text-center">Ações</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($carousels as $carousel): ?>
+        <?php foreach ($carousels as $carousel): ?>
             <tr>
                 <td><?= $this->Number->format($carousel->id) ?></td>
                 <td><?= h($carousel->nome_carousel) ?></td>
-                <td><?= h($carousel->imagem) ?></td>
-                <td><?= h($carousel->titulo) ?></td>
-                <td><?= h($carousel->descricao) ?></td>
-                <td><?= h($carousel->titulo_botao) ?></td>
-                <td><?= h($carousel->link) ?></td>
-                <td><?= $this->Number->format($carousel->ordem) ?></td>
-                <td><?= $carousel->has('position') ? $this->Html->link($carousel->position->id, ['controller' => 'Positions', 'action' => 'view', $carousel->position->id]) : '' ?></td>
-                <td><?= $carousel->has('color') ? $this->Html->link($carousel->color->id, ['controller' => 'Colors', 'action' => 'view', $carousel->color->id]) : '' ?></td>
-                <td><?= $carousel->has('situation') ? $this->Html->link($carousel->situation->id, ['controller' => 'Situations', 'action' => 'view', $carousel->situation->id]) : '' ?></td>
-                <td><?= h($carousel->created) ?></td>
-                <td><?= h($carousel->modified) ?></td>
+                <td class="d-none d-sm-table-cell"><?= h($carousel->ordem) ?></td>
+                <td class="d-none d-lg-table-cell">
+                    <?php
+                    if($carousel->situation->id == 1){
+                        echo"<span class='badge badge-success'>".$carousel->situation->nome_situacao."</span>";
+                    }else{
+                        echo"<span class='badge badge-danger'>".$carousel->situation->nome_situacao."</span>";
+                    }
+                    ?>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $carousel->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $carousel->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $carousel->id], ['confirm' => __('Are you sure you want to delete # {0}?', $carousel->id)]) ?>
+                    <span class='d-none d-md-block'>
+                        <?= $this->Html->link(__('Visualizar'), ['controller' => 'Carousels', 'action' => 'view', $carousel->id], ['class' => 'btn btn-outline-primary btn-sm']) ?>
+                        <?= $this->Html->link(__('Editar'), ['controller' => 'Carousels', 'action' => 'edit', $carousel->id], ['class' => 'btn btn-outline-warning btn-sm']) ?>
+                        <?= $this->Form->postLink(__('Apagar'), ['controller' => 'Carousels', 'action' => 'delete', $carousel->id], ['class' => 'btn btn-outline-danger btn-sm', 'confirm' => __('Realmente Deseja apagar o carousel: {0} ?', $carousel->id)]) ?>
+                    </span>
+                    <div class="dropdown d-block d-md-none">
+                        <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Ações
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
+                        <?= $this->Html->link(__('Visualizar'), ['controller' => 'Carousels', 'action' => 'view', $carousel->id], ['class' => 'dropdown-item']) ?>
+                        <?= $this->Html->link(__('Editar'), ['controller' => 'Carousels', 'action' => 'edit', $carousel->id], ['class' => 'dropdown-item']) ?>
+                        <?= $this->Form->postLink(__('Apagar'), ['controller' => 'Carousels', 'action' => 'delete', $carousel->id], ['class' => 'dropdown-item', 'confirm' => __('Realmente Deseja apagar o carousel: {0} ?', $carousel->id)]) ?>
+                        </div>
+                    </div>
                 </td>
             </tr>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
 </div>
