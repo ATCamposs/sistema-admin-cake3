@@ -27,10 +27,10 @@
         echo '<div class="container">';
         echo '<div class="carousel-caption '.$carousel->position->posicao.'">';
         if($carousel->titulo != ""){
-          echo '<h1 class="d-none d-md-block">Example headline.</h1>';
+          echo '<h1 class="d-none d-md-block">'.$carousel->titulo.'.</h1>';
         }
         if($carousel->descricao != ""){
-          echo '<p class="d-none d-md-block">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>';
+          echo '<p class="d-none d-md-block">'.$carousel->descricao.'</p>';
         }
         if(($carousel->titulo_botao != "") AND ($carousel->link != "") AND ($carousel->color_id != "")){
           echo '<p><a class="btn btn-lg btn-'.$carousel->color->cor.'" href="'.$carousel->link.'" role="button">'.$carousel->titulo_botao.'</a></p>';

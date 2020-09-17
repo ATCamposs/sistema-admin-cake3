@@ -40,6 +40,7 @@
                     ?>
                 <td class="actions">
                     <span class='d-none d-md-block'>
+                    <?= $this->Html->link(__('<i class="fas fa-angle-double-up"></i>'), ['controller' => 'Carousels', 'action' => 'changeCarouselOrder', $carousel->id], ['class' => 'btn btn-outline-info btn-sm', 'escape' => false]) ?>
                         <?= $this->Html->link(__('Visualizar'), ['controller' => 'Carousels', 'action' => 'view', $carousel->id], ['class' => 'btn btn-outline-primary btn-sm']) ?>
                         <?= $this->Html->link(__('Editar'), ['controller' => 'Carousels', 'action' => 'edit', $carousel->id], ['class' => 'btn btn-outline-warning btn-sm']) ?>
                         <?= $this->Form->postLink(__('Apagar'), ['controller' => 'Carousels', 'action' => 'delete', $carousel->id], ['class' => 'btn btn-outline-danger btn-sm', 'confirm' => __('Realmente Deseja apagar o carousel: {0} ?', $carousel->id)]) ?>

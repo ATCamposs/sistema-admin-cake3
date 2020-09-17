@@ -3,6 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Carousels Controller
@@ -188,5 +189,34 @@ class CarouselsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function changeCarouselOrder($id = null)
+    {
+        $carouselTable = TableRegistry::get('Carousels');
+        $actualSlide = $carouselTable->getActualSlide($id);
+        
+        $befOrder = $actualSlide->ordem -1;
+        $befSlide = $carouselTable->getBeftSlide($befOrder);
+
+        if($befSlide){
+            $actualCarousel = $this->Carousels->newEntity();
+            $actualCarousel->id = $actualSlide->id;
+            $actualCarousel->ordem = $actualSlide->ordem - 1;
+            $this->Carousels->save($actualCarousel);
+            
+            $antCarousel = $this->Carousels->newEntity();
+            $antCarousel->id = $befSlide->id;
+            $antCarousel->ordem = $befSlide->ordem + 1;
+            $this->Carousels->save($antCarousel);
+
+            
+        }else{
+            $this->Flash->danger(__('The carousel cannot be moved.'));
+            return $this->redirect(['action' => 'index']);
+        }
+
+
+
     }
 }
