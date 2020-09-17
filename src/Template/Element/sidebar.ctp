@@ -39,7 +39,7 @@
             </li>
             <li>
             <?= $this->Html->link(
-                    '<i class="fas fa-sliders-h"></i> Serviços',
+                    '<i class="fas fa-wrench"></i> Serviços',
                     [
                         'controller' => 'Servicos',
                         'action' => 'view',

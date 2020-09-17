@@ -30,9 +30,12 @@ class HomeController extends AppController
     {
         $carouselTable = TableRegistry::get('Carousels');
         $carousels = $carouselTable->getShowSlidesHome();
+
+        $servicosTable = TableRegistry::get('Servicos');
+        $servicos = $servicosTable->getListServicesHome('1');
         
 
-        $this->set(compact('carousels'));
+        $this->set(compact('carousels', 'servicos'));
     }
 
 }

@@ -55,60 +55,59 @@ class ServicosTable extends Table
         $validator
             ->scalar('titulo_ser')
             ->maxLength('titulo_ser', 220)
-            ->requirePresence('titulo_ser', 'create')
-            ->notEmpty('titulo_ser');
+            ->notEmpty('titulo_ser', 'Título do serviço é obrigatório');
 
         $validator
             ->scalar('icone_um')
             ->maxLength('icone_um', 45)
-            ->requirePresence('icone_um', 'create')
-            ->notEmpty('icone_um');
+            ->notEmpty('icone_um', 'Icone do serviço é obrigatório');
 
         $validator
             ->scalar('titulo_um')
             ->maxLength('titulo_um', 45)
-            ->requirePresence('titulo_um', 'create')
-            ->notEmpty('titulo_um');
+            ->notEmpty('titulo_um', 'Título do serviço é obrigatório');
 
         $validator
             ->scalar('descricao_um')
-            ->requirePresence('descricao_um', 'create')
-            ->notEmpty('descricao_um');
+            ->notEmpty('descricao_um', 'Título do serviço é obrigatório');
 
         $validator
             ->scalar('icone_dois')
             ->maxLength('icone_dois', 45)
-            ->requirePresence('icone_dois', 'create')
-            ->notEmpty('icone_dois');
+            ->notEmpty('icone_dois', 'Icone do serviço é obrigatório');
 
         $validator
             ->scalar('titulo_dois')
             ->maxLength('titulo_dois', 45)
-            ->requirePresence('titulo_dois', 'create')
-            ->notEmpty('titulo_dois');
+            ->notEmpty('titulo_dois', 'Título do serviço é obrigatório');
 
         $validator
             ->scalar('descricao_dois')
-            ->requirePresence('descricao_dois', 'create')
-            ->notEmpty('descricao_dois');
+            ->notEmpty('descricao_dois', 'Título do serviço é obrigatório');
 
         $validator
             ->scalar('icone_tres')
             ->maxLength('icone_tres', 45)
-            ->requirePresence('icone_tres', 'create')
-            ->notEmpty('icone_tres');
+            ->notEmpty('icone_tres', 'Icone do serviço é obrigatório');
 
         $validator
             ->scalar('titulo_tres')
             ->maxLength('titulo_tres', 45)
-            ->requirePresence('titulo_tres', 'create')
-            ->notEmpty('titulo_tres');
+            ->notEmpty('titulo_tres', 'Título do serviço é obrigatório');
 
         $validator
             ->scalar('descricao_tres')
-            ->requirePresence('descricao_tres', 'create')
-            ->notEmpty('descricao_tres');
+            ->notEmpty('descricao_tres', 'Descrição do serviço é obrigatória');
 
         return $validator;
     }
+
+    public function getListServicesHome($id)
+    {
+        $query = $this->find()
+                    ->select(['titulo_ser', 'icone_um', 'titulo_um', 'descricao_um', 'icone_dois', 'titulo_dois', 'descricao_dois', 'icone_tres', 'titulo_tres', 'descricao_tres'])
+                    ->where(['Servicos.id =' => $id]);
+        return $query->first();
+    }
+    
 }

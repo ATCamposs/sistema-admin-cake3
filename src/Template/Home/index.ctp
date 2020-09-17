@@ -68,33 +68,33 @@
  
   <div class="jumbotron servicos">
     <div class="container">
-      <h2 class="display-4 text-center titulo-servicos">Serviços</h2>
+      <h2 class="display-4 text-center titulo-servicos"><?= $servicos->titulo_ser ?></h2>
       <div class="card-deck">
         <div class="card text-center">
           <div class="tamanho-icone">
-            <i class="fas fa-plane"></i>
+            <i class='<?= $servicos->icone_um ?>'></i>
           </div>
           <div class="card-body">
-            <h5 class="card-title">Serviço um</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <h5 class="card-title"><?= $servicos->titulo_um ?></h5>
+            <p class="card-text"><?= $servicos->descricao_um ?></p>
           </div>
         </div>
         <div class="card text-center">
           <div class="tamanho-icone">
-            <i class="fas fa-train"></i>
+            <i class='<?= $servicos->icone_dois ?>'></i>
           </div>
           <div class="card-body">
-            <h5 class="card-title">Serviço dois</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even content than the second to show that equal height action.</p>
+            <h5 class="card-title"><?= $servicos->titulo_dois ?></h5>
+            <p class="card-text"><?= $servicos->descricao_dois ?></p>
           </div>
         </div>
         <div class="card text-center">
           <div class="tamanho-icone">
-            <i class="fas fa-bus-alt"></i>
+            <i class='<?= $servicos->icone_tres ?>'></i>
           </div>
           <div class="card-body">
-            <h5 class="card-title">Serviço tres</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content that equal height action.</p>
+            <h5 class="card-title"><?= $servicos->titulo_tres ?></h5>
+            <p class="card-text"><?= $servicos->descricao_tres ?></p>
           </div>
         </div>
       </div>
