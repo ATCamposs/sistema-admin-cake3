@@ -63,6 +63,17 @@
                     ]
                 ) ?>
             </li>
+            <li><?= $this->Html->link(
+            '<i class="fas fa-newspaper"></i> Sobre Empresa',
+            [
+                'controller' => 'EmpresasSobs',
+                'action' => 'index'
+            ],
+            [
+                'escape'=> false
+            ]
+            ); ?>
+            </li>
             <li>
             <?= $this->Html->link(
                     '<i class="fas fa-sign-out-alt"></i> Sair',
