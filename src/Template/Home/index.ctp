@@ -103,22 +103,22 @@
 
   <div class="jumbotron depoimento">
     <div class="container">
-      <h2 class="display-4 text-center titulo-depoimento">Depoimentos</h2>
-      <p class="lead text-center desc-depoimento">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+      <h2 class="display-4 text-center titulo-depoimento"><?= $depoimentos->nome_dep ?></h2>
+      <p class="lead text-center desc-depoimento"><?= $depoimentos->descricao_dep ?></p>
       <div class="card-deck">
         <div class="card text-center">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/JfAgl6CGg2Q?rel=0"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <?=$depoimentos->video_um ?>
           </div>
         </div>
         <div class="card text-center">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/4tBeeMcw2sM?rel=0"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <?=$depoimentos->video_dois ?>
           </div>
         </div>
         <div class="card text-center">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/i_R6sMRRQ0s?rel=0"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <?=$depoimentos->video_tres ?>
           </div>
         </div>
       </div>

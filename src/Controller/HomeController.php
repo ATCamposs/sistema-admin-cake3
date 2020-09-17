@@ -34,8 +34,10 @@ class HomeController extends AppController
         $servicosTable = TableRegistry::get('Servicos');
         $servicos = $servicosTable->getListServicesHome('1');
         
+        $depoimentosTable = TableRegistry::get('Depoimentos');
+        $depoimentos = $depoimentosTable->getListDepsHome('1');
 
-        $this->set(compact('carousels', 'servicos'));
+        $this->set(compact('carousels', 'servicos', 'depoimentos'));
     }
 
 }

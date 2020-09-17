@@ -52,6 +52,19 @@
             </li>
             <li>
             <?= $this->Html->link(
+                    '<i class="fas fa-video"></i> Videos',
+                    [
+                        'controller' => 'Depoimentos',
+                        'action' => 'view',
+                        '1'
+                    ],
+                    [
+                        'escape' => false
+                    ]
+                ) ?>
+            </li>
+            <li>
+            <?= $this->Html->link(
                     '<i class="fas fa-sign-out-alt"></i> Sair',
                     [
                         'controller' => 'Users',
