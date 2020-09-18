@@ -46,7 +46,8 @@
     <dd class="col-sm-9"><?= $contatosMsg->has('user') ? $this->Html->link($contatosMsg->user->name, ['controller' => 'Users', 'action' => 'view', $contatosMsg->user->id]) : '' ?></dd>
 
     <dt class="col-sm-3">Situação</dt>
-    <dd class="col-sm-9"><?= $contatosMsg->has('conts_msgs_sit') ? $this->Html->link($contatosMsg->conts_msgs_sit->id, ['controller' => 'ContsMsgsSits', 'action' => 'view', $contatosMsg->conts_msgs_sit->id]) : '' ?></dd>
+    <dd class="col-sm-9"><?php echo "<span class='badge badge-".$contatosMsg->conts_msgs_sit->color->cor."'>"
+                        .$contatosMsg->conts_msgs_sit->nome_sit_msg_cont."</span>";?> </dd>
 
     <dt class="col-sm-3 text-truncate">Cadastro</dt>
     <dd class="col-sm-9"><?= h($contatosMsg->created) ?></dd>

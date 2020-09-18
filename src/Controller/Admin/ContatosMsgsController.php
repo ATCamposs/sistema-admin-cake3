@@ -21,7 +21,7 @@ class ContatosMsgsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'ContsMsgsSits']
+            'contain' => ['Users', 'ContsMsgsSits', 'ContsMsgsSits.Colors']
         ];
         $contatosMsgs = $this->paginate($this->ContatosMsgs);
 
@@ -38,7 +38,7 @@ class ContatosMsgsController extends AppController
     public function view($id = null)
     {
         $contatosMsg = $this->ContatosMsgs->get($id, [
-            'contain' => ['Users', 'ContsMsgsSits']
+            'contain' => ['Users', 'ContsMsgsSits', 'ContsMsgsSits.Colors']
         ]);
 
         $this->set('contatosMsg', $contatosMsg);

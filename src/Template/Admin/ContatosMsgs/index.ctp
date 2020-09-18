@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <?php foreach ($contatosMsgs as $contatosMsg): ?>
-                <tr>
+                <tr class="table-<?= $contatosMsg->conts_msgs_sit->color->cor ?>">
                     <td><?= $this->Number->format($contatosMsg->id) ?></td>
                     <td><?= h($contatosMsg->nome) ?></td>
                     <td class="d-none d-sm-table-cell">
@@ -32,7 +32,8 @@
                         <?= h($contatosMsg->assunto) ?>                         
                     </td>
                     <td class="d-none d-lg-table-cell">
-                        <?= h($contatosMsg->conts_msgs_sit_id) ?>                         
+                        <?php echo "<span class='badge badge-".$contatosMsg->conts_msgs_sit->color->cor."'>"
+                        .$contatosMsg->conts_msgs_sit->nome_sit_msg_cont."</span>";?>                     
                     </td>
                     <td>
                         <span class="d-none d-md-block">
