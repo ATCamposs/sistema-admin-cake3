@@ -133,4 +133,13 @@ class EmpresasSobsTable extends Table
                     ->order(['EmpresasSobs.ordem' => 'DESC']);
         return $query->first();
     }
+
+    public function getListarEmpSob()
+    {
+        $query = $this->find()
+                    ->select(['id', 'titulo', 'descricao', 'imagem'])
+                    ->where(['EmpresasSobs.situation_id =' => 1])
+                    ->order(['EmpresasSobs.ordem' => 'ASC']);
+        return $query;
+    }
 }

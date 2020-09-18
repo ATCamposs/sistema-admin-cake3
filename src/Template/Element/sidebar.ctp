@@ -74,6 +74,17 @@
             ]
             ); ?>
             </li>
+            <li><?= $this->Html->link(
+            '<i class="far fa-envelope"></i> Mensagens',
+            [
+                'controller' => 'ContatosMsgs',
+                'action' => 'index'
+            ],
+            [
+                'escape'=> false
+            ]
+            ); ?>
+            </li>
             <li>
             <?= $this->Html->link(
                     '<i class="fas fa-sign-out-alt"></i> Sair',

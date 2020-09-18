@@ -28,9 +28,10 @@ class AboutUsController extends AppController
      */
     public function index()
     {
-        $aboutUs = "Bem vindo";
+        $empSobTable = TableRegistry::get('EmpresasSobs');
+        $empSobs = $empSobTable->getListarEmpSob();
 
-        $this->set(compact('aboutUs'));
+        $this->set(compact('empSobs'));
     }
 
 }

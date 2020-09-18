@@ -29,7 +29,7 @@
 <dl class="row">
     <dt class="col-sm-3">Imagem</dt>
     <dd class="col-sm-9">
-        <div class="img-perfil">
+        <div class="img-profile">
             <?php if(!empty($empresasSob->imagem)){ ?>
                 <?= $this->Html->image('../files/sob_emp/'.$empresasSob->id.'/'.$empresasSob->imagem, ['width' => '250', 'height' => '200']) ?>&nbsp;
                 
