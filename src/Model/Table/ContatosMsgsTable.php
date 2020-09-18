@@ -104,4 +104,15 @@ class ContatosMsgsTable extends Table
 
         return $rules;
     }
+
+    public function getSitMsg($id)
+    {
+        $query = $this->find()
+                    ->select(['id'])
+                    ->where([
+                        'ContatosMsgs.id =' => $id, 
+                        'ContatosMsgs.conts_msgs_sit_id =' => 2])
+                    ->order(['ContatosMsgs.id' => 'ASC']);
+        return $query->first();
+    }
 }

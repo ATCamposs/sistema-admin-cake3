@@ -37,11 +37,11 @@
                     </td>
                     <td>
                         <span class="d-none d-md-block">
-                            <?= $this->Html->link(__('Visualizar'), ['controller' => 'ContatosMsgs', 'action' => 'view', $contatosMsg->id], ['class' => 'btn btn-outline-primary btn-sm']) ?>
+                            <?= $this->Html->link(__('Visualizar'), ['controller' => 'ContatosMsgs', 'action' => 'view', $contatosMsg->id], ['class' => 'btn btn-primary btn-sm']) ?>
 
-                            <?= $this->Html->link(__('Editar'), ['controller' => 'ContatosMsgs', 'action' => 'edit', $contatosMsg->id], ['class' => 'btn btn-outline-warning btn-sm']) ?>
+                            <?= $this->Html->link(__('Editar'), ['controller' => 'ContatosMsgs', 'action' => 'edit', $contatosMsg->id], ['class' => 'btn btn-warning btn-sm']) ?>
 
-                            <?= $this->Form->postLink(__('Apagar'), ['controller' => 'ContatosMsgs', 'action' => 'delete', $contatosMsg->id], ['class' =>'btn btn-outline-danger btn-sm', 'confirm' => __('Relamente deseja apagar a mensagem de contato # {0}?', $contatosMsg->id)]) ?>
+                            <?= $this->Form->postLink(__('Apagar'), ['controller' => 'ContatosMsgs', 'action' => 'delete', $contatosMsg->id], ['class' =>'btn btn-danger btn-sm', 'confirm' => __('Relamente deseja apagar a mensagem de contato # {0}?', $contatosMsg->id)]) ?>
                         </span>  
                         <div class="dropdown d-block d-md-none">
                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

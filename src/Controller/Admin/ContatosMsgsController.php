@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * ContatosMsgs Controller
@@ -21,7 +22,8 @@ class ContatosMsgsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'ContsMsgsSits', 'ContsMsgsSits.Colors']
+            'contain' => ['Users', 'ContsMsgsSits', 'ContsMsgsSits.Colors'],
+            'order' => ['ContatosMsgs.id' => 'DESC']
         ];
         $contatosMsgs = $this->paginate($this->ContatosMsgs);
 
@@ -37,9 +39,19 @@ class ContatosMsgsController extends AppController
      */
     public function view($id = null)
     {
+        $contatosMsgsTable = TableRegistry::getTableLocator()->get('ContatosMsgs');
+        $contatosMsgResul = $contatosMsgsTable->getSitMsg($id);
+        
+        if($contatosMsgResul){
+            $contatosMsg = $contatosMsgsTable->newEntity();
+            $contatosMsg->id = $id;
+            $contatosMsg->conts_msgs_sit_id = 1;
+            $contatosMsgsTable->save($contatosMsg);
+        }
+
         $contatosMsg = $this->ContatosMsgs->get($id, [
             'contain' => ['Users', 'ContsMsgsSits', 'ContsMsgsSits.Colors']
-        ]);
+            ]);
 
         $this->set('contatosMsg', $contatosMsg);
     }
