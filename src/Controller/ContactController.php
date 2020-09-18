@@ -28,9 +28,20 @@ class ContactController extends AppController
      */
     public function index()
     {
-        $home = "Bem vindo";
+        $contatoMsgsTable = TableRegistry::getTableLocator()->get('ContatosMsgs');
+        $contatoMsg = $contatoMsgsTable->newEntity();
 
-        $this->set(compact('home'));
+        if($this->request->is('post')){
+            $contatoMsg = $contatoMsgsTable->patchEntity($contatoMsg, $this->request->getData());
+            if($contatoMsgsTable->save($contatoMsg)){
+                $this->Flash->success(__('Mensagem de contato enviada com Sucesso'));
+                return $this->redirect(['view' => 'index']);
+            }else{
+                $this->Flash->error(__('Mensagem de contato não enviada'));
+            }
+        }
+
+        $this->set(compact('contatoMsg'));
     }
 
 }
