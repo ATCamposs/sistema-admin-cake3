@@ -54,7 +54,7 @@ $cakeDescription = 'Administrativo';
     'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js',
-    'dashboard.js']) 
-?>
+    'dashboard.js']) ?>
+<?= $this->fetch('ckeditor') ?>
 </body>
 </html>

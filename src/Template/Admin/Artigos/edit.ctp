@@ -41,21 +41,21 @@
 <div class="form-row">
     <div class="form-group col-md-12">
         <label><span class="text-danger">*</span> Descrição</label>
-        <?= $this->Form->control('descricao', ['class' => 'form-control', 'placeholder' => 'Descrição do artigo', 'label' => false]) ?>
+        <?= $this->Form->control('descricao', ['class' => 'form-control', 'id'=>'editor-um', 'placeholder' => 'Descrição do artigo', 'label' => false]) ?>
     </div>
 </div>
 
 <div class="form-row">
     <div class="form-group col-md-12">
         <label><span class="text-danger">*</span> Conteúdo</label>
-        <?= $this->Form->control('conteudo', ['class' => 'form-control', 'placeholder' => 'Conteúdo do artigo', 'label' => false]) ?>
+        <?= $this->Form->control('conteudo', ['class' => 'form-control', 'id'=>'editor-dois', 'placeholder' => 'Conteúdo do artigo', 'label' => false]) ?>
     </div>
 </div>
 
 <div class="form-row">
     <div class="form-group col-md-12">
         <label><span class="text-danger">*</span> Resumo Público</label>
-        <?= $this->Form->control('resumo_publico', ['class' => 'form-control', 'placeholder' => 'Resumo Público para artigos privados', 'label' => false]) ?>
+        <?= $this->Form->control('resumo_publico', ['class' => 'form-control', 'id'=>'editor-tres', 'placeholder' => 'Resumo Público para artigos privados', 'label' => false]) ?>
     </div>
 </div>
 
@@ -97,3 +97,5 @@
 </p>
 <?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-warning']) ?>
 <?= $this->Form->end() ?>
+
+<?= $this->element('editor') ?>

@@ -118,13 +118,13 @@
     </dd>
 
     <dt class="col-sm-3">Apresentação</dt>
-    <dd class="col-sm-9"><?= h($artigo->descricao) ?></dd>
+    <dd class="col-sm-9"><?= $artigo->descricao ?></dd>
 
     <dt class="col-sm-3">Resumo Público</dt>
-    <dd class="col-sm-9"><?= h($artigo->resumo_publico) ?></dd>
+    <dd class="col-sm-9"><?= $artigo->resumo_publico ?></dd>
 
     <dt class="col-sm-3">Conteúdo</dt>
-    <dd class="col-sm-9"><?= h($artigo->conteudo) ?></dd>
+    <dd class="col-sm-9"><?= $artigo->conteudo ?></dd>
 
 </dl>
 <?php //var_dump($artigo); ?>
