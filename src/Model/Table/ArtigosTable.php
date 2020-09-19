@@ -47,6 +47,7 @@ class ArtigosTable extends Table
         $this->addBehavior('Upload');
         $this->addBehavior('UploadRed');
         $this->addBehavior('DeleteFile');
+        $this->addBehavior('SlugUrl');
 
         $this->belongsTo('Robots', [
             'foreignKey' => 'robot_id',

@@ -58,6 +58,7 @@ class ArtigosController extends AppController
                 $artigo->imagem = $this->Artigos->uploadSlugImgRed($this->request->getData()['image']['name']);
 
                 $artigo->user_id = $this->Auth->user('id');;
+                $artigo->slug = $this->Artigos->slugUrlSimples($this->request->getData()['slug']);
 
                  if ($resultSave = $this->Artigos->save($artigo)){
                     $id = $resultSave->id; // último id inserido
