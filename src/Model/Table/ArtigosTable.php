@@ -154,4 +154,22 @@ class ArtigosTable extends Table
                     ->where(['Artigos.slug =' => $slug]);
         return $query->first();
     }
+
+    public function getArtigoAnt($id)
+    {
+        $query = $this->find()
+                    ->select(['slug'])
+                    ->where(['Artigos.id <' => $id])
+                    ->order(['Artigos.id' => 'DESC']);
+        return $query->first();
+    }
+
+    public function getArtigoProx($id)
+    {
+        $query = $this->find()
+                    ->select(['slug'])
+                    ->where(['Artigos.id >' => $id])
+                    ->order(['Artigos.id' => 'ASC']);
+        return $query->first();
+    }
 }

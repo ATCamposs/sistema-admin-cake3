@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
           <div class="col-md-8 blog-main">
-
+            <?php if($artigo){ ?>
             <div class="blog-post">
               <h2 class="blog-post-title"><?= $artigo->titulo ?></h2><hr>
               <p class="blog-post-meta">                
@@ -20,12 +20,26 @@
             </div><!-- /.blog-post -->                
 
             <nav class="blog-pagination">
-              <a class="btn btn-outline-primary" href="#">Anterior</a>
-              <a class="btn btn-outline-secondary disabled" href="#">Próximo</a>
+              <?php
+                if($artigoAnt){
+                  echo $this->Html->link(__('Anterior'), ['controller' => 'Artigo', 'action' => 'view', $artigoAnt->slug], ['class' => 'btn btn-outline-primary']). '&nbsp;';
+                }else{
+                  $this->Html->link(__('Anterior'), ['controller' => 'Artigo', 'action' => 'view'], ['class' => 'btn btn-outline-secondary disabled']). '&nbsp;';
+                }
+
+                if($artigoProx){
+                  echo $this->Html->link(__('Próximo'), ['controller' => 'Artigo', 'action' => 'view', $artigoProx->slug], ['class' => 'btn btn-outline-primary']);
+                }else{
+                  $this->Html->link(__('Próximo'), ['controller' => 'Artigo', 'action' => 'view'], ['class' => 'btn btn-outline-secondary disabled']);
+                }
+              ?>
             </nav>
-
+              <?php }else{?>
+                <div class='alert alert-danger' role='alert'>
+                  Artigo não encontrado
+                </div>
           </div><!-- /.blog-main -->
-
+              
           <aside class="col-md-4 blog-sidebar">
             <div class="p-3 mb-3 bg-light rounded">
               <h4 class="font-italic">Sobre</h4>

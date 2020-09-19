@@ -30,8 +30,11 @@ class ArtigoController extends AppController
     {
         $artigoTable = TableRegistry::get('Artigos');
         $artigo = $artigoTable->getVerArtigo($slug);
-
-        $this->set(compact('artigo'));
+        if($artigo):
+        $artigoAnt = $artigoTable->getArtigoAnt($artigo->id);
+        $artigoProx = $artigoTable->getArtigoProx($artigo->id);
+        endif;
+        $this->set(compact('artigo', 'artigoAnt', 'artigoProx'));
     }
 
 }
