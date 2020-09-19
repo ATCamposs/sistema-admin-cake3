@@ -14,6 +14,9 @@
             <?= $this->Html->link(__('Sobre a empresa'), ['controller' => 'aboutUs', 'action' => 'index'], ['class' => 'nav-link']) ?>
             </li>
             <li class="nav-item menu">
+            <?= $this->Html->link(__('Blog'), ['controller' => 'blog', 'action' => 'index'], ['class' => 'nav-link']) ?>
+            </li>
+            <li class="nav-item menu">
             <?= $this->Html->link(__('Contato'), ['controller' => 'contact', 'action' => 'index'], ['class' => 'nav-link']) ?>
             </li>
         </ul>

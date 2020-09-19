@@ -64,3 +64,30 @@ header{
 	margin-bottom: 40px;
 	color: #252c41;
 }
+.blog{
+	background-color: #f9faff;
+	border-radius: 0rem;
+	margin-bottom: 0rem;	
+}
+.blog-titulo{
+	margin-bottom: 40px;
+	color: #252c41;
+}
+.blog-post-title a{
+	color: #252c41;
+	text-decoration: none;
+}
+.blog-post-title a:hover{
+	color: #dc3545!important;
+	text-decoration: none;
+}
+a.cont-lendo-post{
+	/*color: #252c41;*/
+	text-decoration: none;	
+}
+.blog-pagination{
+	margin-bottom: 4rem;
+}
+.blog-pagination > .btn{
+	border-radius: 2rem;
+}
