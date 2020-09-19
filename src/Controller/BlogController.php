@@ -29,6 +29,17 @@ class BlogController extends AppController
     public function index()
     {
         $artigoTable = TableRegistry::get('Artigos');
+
+        $this->paginate = [
+            'limit' => 4,
+            'conditions' => [
+                'Artigos.situation_id = ' => 1
+            ],
+            'order' => [
+                'Artigos.id' => 'desc'
+            ]
+        ];
+
         $artigos = $this->paginate($artigoTable);
 
         $artigoUltimos = $artigoTable->getArtigoUltimos();

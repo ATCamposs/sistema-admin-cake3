@@ -151,7 +151,7 @@ class ArtigosTable extends Table
     {
         $query = $this->find()
                     ->select(['id', 'titulo', 'conteudo', 'created'])
-                    ->where(['Artigos.slug =' => $slug]);
+                    ->where(['Artigos.slug =' => $slug, 'Artigos.situation_id =' => 1]);
         return $query->first();
     }
 
@@ -159,7 +159,7 @@ class ArtigosTable extends Table
     {
         $query = $this->find()
                     ->select(['slug'])
-                    ->where(['Artigos.id <' => $id])
+                    ->where(['Artigos.id <' => $id, 'Artigos.situation_id =' => 1])
                     ->order(['Artigos.id' => 'DESC']);
         return $query->first();
     }
@@ -168,7 +168,7 @@ class ArtigosTable extends Table
     {
         $query = $this->find()
                     ->select(['slug'])
-                    ->where(['Artigos.id >' => $id])
+                    ->where(['Artigos.id >' => $id, 'Artigos.situation_id =' => 1])
                     ->order(['Artigos.id' => 'ASC']);
         return $query->first();
     }
@@ -177,6 +177,7 @@ class ArtigosTable extends Table
     {
         $query = $this->find()
                     ->select(['titulo', 'slug'])
+                    ->where(['Artigos.situation_id =' => 1])
                     ->order(['Artigos.id' => 'DESC'])
                     ->limit(6);
         return $query;
@@ -186,6 +187,7 @@ class ArtigosTable extends Table
     {
         $query = $this->find()
                     ->select(['titulo', 'slug'])
+                    ->where(['Artigos.situation_id =' => 1])
                     ->order(['Artigos.qnt_acesso' => 'DESC'])
                     ->limit(6);
         return $query;
