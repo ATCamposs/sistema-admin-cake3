@@ -26,4 +26,15 @@ class ContatoMailer extends Mailer
         ->setViewVars(['nome' => $msgContato->nome, 'assunto' => $msgContato->assunto, 'mensagem' => $msgContato->mensagem])
         ->setSubject(sprintf('Mensagem recebida com sucesso'));
     }
+
+    public function novaMsgContatoAdm($msgContato)
+    {
+        $this->setTo($msgContato->emailAdm)
+        ->setProfile('Smtp')
+        ->setEmailFormat('html')
+        ->setTemplate('contato_adm')
+        ->setLayout('contato')
+        ->setViewVars(['nome' => $msgContato->nome, 'email' => $msgContato->email, 'assunto' => $msgContato->assunto, 'mensagem' => $msgContato->mensagem])
+        ->setSubject(sprintf('Nova Mensagem de Contato'));
+    }
 }

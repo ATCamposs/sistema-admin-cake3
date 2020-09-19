@@ -38,6 +38,8 @@ class ContactController extends AppController
             $contatoMsg = $contatoMsgsTable->patchEntity($contatoMsg, $this->request->getData());
             if($contatoMsgsTable->save($contatoMsg)){
                 $this->getMailer('Contato')->send('novaMsgContato', [$contatoMsg]);
+                $contatoMsg->emailAdm = 'testemail@gmail.com';
+                $this->getMailer('Contato')->send('novaMsgContatoAdm', [$contatoMsg]);
                 $this->Flash->success(__('Mensagem de contato enviada com Sucesso'));
                 return $this->redirect(['view' => 'index']);
             }else{
