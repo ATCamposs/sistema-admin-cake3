@@ -42,11 +42,12 @@
           </div><!-- /.blog-main -->
 
           <aside class="col-md-4 blog-sidebar">
+          <?php if($autorSob && $autorSob->situation_id == 1){ ?>
             <div class="p-3 mb-3 bg-light rounded">
-              <h4 class="font-italic">Sobre</h4>
-              <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+              <h4 class="font-italic"><?= $autorSob->titulo ?></h4>
+              <p class="mb-0"><?= $autorSob->descricao ?></p>
             </div>
-
+              <?php } ?>
             <div class="p-3">
               <h4 class="font-italic">Recentes</h4>
               <ol class="list-unstyled mb-0">

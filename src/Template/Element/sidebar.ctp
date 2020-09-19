@@ -96,6 +96,18 @@
             ]
             ); ?>
             </li>
+            <li><?= $this->Html->link(
+            '<i class="far fa-user"></i> Aobre o Autor',
+            [
+                'controller' => 'AutorsSobs',
+                'action' => 'edit',
+                1
+            ],
+            [
+                'escape'=> false
+            ]
+            ); ?>
+            </li>
             <li>
             <?= $this->Html->link(
                     '<i class="fas fa-sign-out-alt"></i> Sair',

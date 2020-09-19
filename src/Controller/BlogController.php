@@ -33,7 +33,11 @@ class BlogController extends AppController
 
         $artigoUltimos = $artigoTable->getArtigoUltimos();
         $artigoDestaques = $artigoTable->getartigoDestaques();
-        $this->set(compact('artigos', 'artigoUltimos', 'artigoDestaques'));
+
+        $autorSobTable = TableRegistry::get('AutorsSobs');
+        $autorSob = $autorSobTable->getVerSobAutor();
+
+        $this->set(compact('artigos', 'artigoUltimos', 'artigoDestaques', 'autorSob'));
     }
 
 }

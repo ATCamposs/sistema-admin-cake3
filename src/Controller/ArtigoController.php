@@ -39,7 +39,9 @@ class ArtigoController extends AppController
         endif;
         $artigoUltimos = $artigoTable->getArtigoUltimos();
         $artigoDestaques = $artigoTable->getartigoDestaques();
-        $this->set(compact('artigo', 'artigoAnt', 'artigoProx', 'artigoUltimos', 'artigoDestaques'));
+        $autorSobTable = TableRegistry::get('AutorsSobs');
+        $autorSob = $autorSobTable->getVerSobAutor();
+        $this->set(compact('artigo', 'artigoAnt', 'artigoProx', 'artigoUltimos', 'artigoDestaques', 'autorSob'));
     }
 
 }
