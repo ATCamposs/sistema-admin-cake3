@@ -44,6 +44,9 @@ class ArtigosTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Upload');
+        $this->addBehavior('UploadRed');
+        $this->addBehavior('DeleteFile');
 
         $this->belongsTo('Robots', [
             'foreignKey' => 'robot_id',
@@ -82,52 +85,45 @@ class ArtigosTable extends Table
         $validator
             ->scalar('titulo')
             ->maxLength('titulo', 220)
-            ->requirePresence('titulo', 'create')
-            ->notEmpty('titulo');
+            ->notEmpty('titulo', 'Titulo do artigo é obrigatório');
 
         $validator
             ->scalar('descricao')
-            ->requirePresence('descricao', 'create')
-            ->notEmpty('descricao');
+            ->notEmpty('descricao', 'Descrição do artigo é obrigatório');
 
         $validator
             ->scalar('conteudo')
-            ->requirePresence('conteudo', 'create')
-            ->notEmpty('conteudo');
+            ->notEmpty('conteudo', 'Conteúdo do artigo é obrigatório');
 
         $validator
-            ->scalar('imagem')
-            ->maxLength('imagem', 220)
-            ->requirePresence('imagem', 'create')
-            ->notEmpty('imagem');
+            ->notEmpty('imagem', 'Necessário selecionar a foto')
+            ->add('imagem', 'file', [
+                'rule' => ['mimeType', ['image/jpeg', 'image/png']],
+                'message' => 'Extensão da foto inválida. Selecione foto JPEG ou PNG',
+            ]);
 
         $validator
             ->scalar('slug')
             ->maxLength('slug', 220)
-            ->requirePresence('slug', 'create')
-            ->notEmpty('slug');
+            ->notEmpty('slug', 'Slug do artigo é obrigatório');
 
         $validator
             ->scalar('keywords')
             ->maxLength('keywords', 220)
-            ->requirePresence('keywords', 'create')
-            ->notEmpty('keywords');
+            ->notEmpty('keywords', 'Palavra chave do artigo é obrigatório');
 
         $validator
             ->scalar('description')
             ->maxLength('description', 220)
-            ->requirePresence('description', 'create')
             ->notEmpty('description');
 
         $validator
             ->scalar('resumo_publico')
-            ->requirePresence('resumo_publico', 'create')
-            ->notEmpty('resumo_publico');
+            ->notEmpty('resumo_publico', 'Resumo público do artigo é obrigatório');
 
         $validator
             ->integer('qnt_acesso')
-            ->requirePresence('qnt_acesso', 'create')
-            ->notEmpty('qnt_acesso');
+            ->notEmpty('qnt_acesso', 'Quantidade de acesso ao artigo é obrigatório');
 
         return $validator;
     }
