@@ -41,7 +41,9 @@ class ArtigoController extends AppController
         $artigoDestaques = $artigoTable->getartigoDestaques();
         $autorSobTable = TableRegistry::get('AutorsSobs');
         $autorSob = $autorSobTable->getVerSobAutor();
-        $this->set(compact('artigo', 'artigoAnt', 'artigoProx', 'artigoUltimos', 'artigoDestaques', 'autorSob'));
+        $redeSociaTable = TableRegistry::get('RedesSocias');
+        $redeSocias = $redeSociaTable->getListRedeSocias();
+        $this->set(compact('artigo', 'artigoAnt', 'artigoProx', 'artigoUltimos', 'artigoDestaques', 'autorSob', 'redeSocias'));
     }
 
 }

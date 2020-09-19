@@ -37,7 +37,10 @@ class BlogController extends AppController
         $autorSobTable = TableRegistry::get('AutorsSobs');
         $autorSob = $autorSobTable->getVerSobAutor();
 
-        $this->set(compact('artigos', 'artigoUltimos', 'artigoDestaques', 'autorSob'));
+        $redeSociaTable = TableRegistry::get('RedesSocias');
+        $redeSocias = $redeSociaTable->getListRedeSocias();
+
+        $this->set(compact('artigos', 'artigoUltimos', 'artigoDestaques', 'autorSob', 'redeSocias'));
     }
 
 }

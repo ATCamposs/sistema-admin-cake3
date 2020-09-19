@@ -108,6 +108,17 @@
             ]
             ); ?>
             </li>
+            <li><?= $this->Html->link(
+            '<i class="fas fa-share-alt-square"></i> Redes Sociais',
+            [
+                'controller' => 'RedesSocias',
+                'action' => 'index'
+            ],
+            [
+                'escape'=> false
+            ]
+            ); ?>
+            </li>
             <li>
             <?= $this->Html->link(
                     '<i class="fas fa-sign-out-alt"></i> Sair',

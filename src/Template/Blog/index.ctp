@@ -74,10 +74,9 @@
             <div class="p-3">
               <h4 class="font-italic">Redes Sociais</h4>
               <ol class="list-unstyled">
-                <li><a href="https://www.instagram.com/celkecursos" target="_blank">Instagram</a></li>
-                <li><a href="https://www.facebook.com/celkecursos/" target="_blank">Facebook</a></li>
-                <li><a href="https://www.youtube.com/channel/UC5ClMRHFl8o_MAaO4w7ZYug" target="_blank">YouTube</a></li>
-                <li><a href="https://twitter.com/celkecursos" target="_blank">Twiter</a></li>
+                <?php foreach($redeSocias as $redeSocia) { ?>
+                  <li><i class="<?= $redeSocia->icone ?>"></i> <a href="<?= $redeSocia->link ?>" target="_blank"><?= $redeSocia->titulo ?></a></li>
+                <?php } ?>
               </ol>
             </div>
           </aside><!-- /.blog-sidebar -->
