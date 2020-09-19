@@ -146,4 +146,12 @@ class ArtigosTable extends Table
 
         return $rules;
     }
+
+    public function getVerArtigo($slug)
+    {
+        $query = $this->find()
+                    ->select(['id', 'titulo', 'conteudo', 'created'])
+                    ->where(['Artigos.slug =' => $slug]);
+        return $query->first();
+    }
 }

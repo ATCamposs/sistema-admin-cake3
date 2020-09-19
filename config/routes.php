@@ -80,6 +80,18 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->fallbacks(DashedRoute::class);
 });
 
+Router::scope('/', function ($routes) {
+    $routes->connect(
+        '/artigo/:slug', // E.g. /blog/3-CakePHP_Rocks
+        ['controller' => 'Artigo', 'action' => 'view']
+    )
+    // Define the route elements in the route template
+    // to pass as function arguments. Order matters since this
+    // will simply map ":id" to $articleId in your action
+    ->setPass(['slug']);
+    $routes->fallbacks(DashedRoute::class);
+});
+
 Router::prefix('admin', function (RouteBuilder $routes) {
     $routes->fallbacks(DashedRoute::class);
 });
