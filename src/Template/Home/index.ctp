@@ -44,17 +44,6 @@
 
       ?>
 
-      
-        
-        
-          
-            
-            
-            
-          
-        
-      
-
     </div>
     <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -122,6 +111,34 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="jumbotron ult-art">
+    <div class="container">
+      <h2 class="display-4 text-center titulo-ult-art">Últimos Artigos</h2>
+      <div class="card-deck">
+
+        <?php foreach($artigosUltimos as $artigosUltimo) { ?>
+        <div class="card text-center">
+          <?php 
+            $imagem = $this->Html->image('../files/artigo/'.$artigosUltimo->id . '/' . $artigosUltimo->imagem, ['class' => 'card-img-top', 'alt' => $artigosUltimo->titulo]);
+
+            echo $this->Html->link(__($imagem), ['controller' => 'Artigo', 'action' => 'view' , $artigosUltimo->slug], ['escape' => false]);
+          ?>
+
+          <div class="card-body">
+            <h5 class="card-title title-post-home">
+              <?= $this->Html->link(__($artigosUltimo->titulo), ['controller'=> 'Artigo', 'action' => 'view', $artigosUltimo->slug]) ?>
+            </h5>
+            <p class="card-text"><?= $artigosUltimo->descricao ?></p>
+          </div>
+        </div>
+
+        <?php } ?>
+
+
+        </div>
     </div>
   </div>
 </main>

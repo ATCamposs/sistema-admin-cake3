@@ -37,7 +37,10 @@ class HomeController extends AppController
         $depoimentosTable = TableRegistry::get('Depoimentos');
         $depoimentos = $depoimentosTable->getListDepsHome('1');
 
-        $this->set(compact('carousels', 'servicos', 'depoimentos'));
+        $artigoTable = TableRegistry::get('Artigos');
+        $artigosUltimos = $artigoTable->getLisarUltArt();
+
+        $this->set(compact('carousels', 'servicos', 'depoimentos', 'artigosUltimos'));
     }
 
 }

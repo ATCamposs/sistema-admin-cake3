@@ -192,4 +192,14 @@ class ArtigosTable extends Table
                     ->limit(6);
         return $query;
     }
+
+    public function getLisarUltArt()
+    {
+        $query = $this->find()
+                    ->select(['id', 'titulo', 'descricao', 'imagem', 'slug'])
+                    ->where(['Artigos.situation_id =' => 1])
+                    ->order(['Artigos.id' => 'DESC'])
+                    ->limit(3);
+        return $query;
+    }
 }

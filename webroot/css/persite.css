@@ -91,3 +91,20 @@ a.cont-lendo-post{
 .blog-pagination > .btn{
 	border-radius: 2rem;
 }
+.ult-art{
+	background-color: #f9faff;
+	border-radius: 0rem;
+	margin-bottom: 0rem;
+}
+.titulo-ult-art{
+	color: #252c41;
+	margin-bottom: 40px;
+}
+.title-post-home a{
+	color: #252c41;
+	text-decoration: none;
+}
+.title-post-home a:hover{
+	color: #dc3545!important;
+	text-decoration: none;
+}
