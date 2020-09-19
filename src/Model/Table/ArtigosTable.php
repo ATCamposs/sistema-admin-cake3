@@ -172,4 +172,13 @@ class ArtigosTable extends Table
                     ->order(['Artigos.id' => 'ASC']);
         return $query->first();
     }
+
+    public function getArtigoUltimos()
+    {
+        $query = $this->find()
+                    ->select(['titulo', 'slug'])
+                    ->order(['Artigos.id' => 'DESC'])
+                    ->limit(6);
+        return $query;
+    }
 }

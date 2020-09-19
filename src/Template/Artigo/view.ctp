@@ -4,42 +4,43 @@
       <div class="row">
           <div class="col-md-8 blog-main">
             <?php if($artigo){ ?>
-            <div class="blog-post">
-              <h2 class="blog-post-title"><?= $artigo->titulo ?></h2><hr>
-              <p class="blog-post-meta">                
+              <div class="blog-post">
+                <h2 class="blog-post-title"><?= $artigo->titulo ?></h2><hr>
+                <p class="blog-post-meta">                
+                  <?php
+                    setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+                    date_default_timezone_set('America/Sao_Paulo');
+
+                    //$data = date_format($artigo->created, 'Y-m-d H:i:s');
+
+                    echo strftime ( '%d de %B de %Y' , strtotime(date_format($artigo->created, 'Y-m-d H:i:s')));
+                  ?>
+                </p>
+                <?= $artigo->conteudo ?>
+              </div><!-- /.blog-post -->                
+
+              <nav class="blog-pagination">
                 <?php
-                  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-                  date_default_timezone_set('America/Sao_Paulo');
+                  if($artigoAnt){
+                    echo $this->Html->link(__('Anterior'), ['controller' => 'Artigo', 'action' => 'view', $artigoAnt->slug], ['class' => 'btn btn-outline-primary']) . '&nbsp;';
+                  }else{
+                    echo $this->Html->link(__('Anterior'), ['controller' => 'Artigo', 'action' => 'view'], ['class' => 'btn btn-outline-secondary disabled']) . '&nbsp;';
+                  }
 
-                  //$data = date_format($artigo->created, 'Y-m-d H:i:s');
-
-                  echo strftime ( '%d de %B de %Y' , strtotime(date_format($artigo->created, 'Y-m-d H:i:s')));
+                  if($artigoProx){
+                    echo $this->Html->link(__('Próximo'), ['controller' => 'Artigo', 'action' => 'view', $artigoProx->slug], ['class' => 'btn btn-outline-primary']);
+                  }else{
+                    echo $this->Html->link(__('Próximo'), ['controller' => 'Artigo', 'action' => 'view'], ['class' => 'btn btn-outline-secondary disabled']);
+                  }
                 ?>
-              </p>
-              <?= $artigo->conteudo ?>
-            </div><!-- /.blog-post -->                
-
-            <nav class="blog-pagination">
-              <?php
-                if($artigoAnt){
-                  echo $this->Html->link(__('Anterior'), ['controller' => 'Artigo', 'action' => 'view', $artigoAnt->slug], ['class' => 'btn btn-outline-primary']). '&nbsp;';
-                }else{
-                  $this->Html->link(__('Anterior'), ['controller' => 'Artigo', 'action' => 'view'], ['class' => 'btn btn-outline-secondary disabled']). '&nbsp;';
-                }
-
-                if($artigoProx){
-                  echo $this->Html->link(__('Próximo'), ['controller' => 'Artigo', 'action' => 'view', $artigoProx->slug], ['class' => 'btn btn-outline-primary']);
-                }else{
-                  $this->Html->link(__('Próximo'), ['controller' => 'Artigo', 'action' => 'view'], ['class' => 'btn btn-outline-secondary disabled']);
-                }
-              ?>
-            </nav>
-              <?php }else{?>
-                <div class='alert alert-danger' role='alert'>
-                  Artigo não encontrado
-                </div>
+              </nav>
+            <?php }else { ?>
+              <div class="alert alert-danger" role="alert">
+                Artigo não encontrado!
+              </div>
+            <?php } ?>
           </div><!-- /.blog-main -->
-              
+
           <aside class="col-md-4 blog-sidebar">
             <div class="p-3 mb-3 bg-light rounded">
               <h4 class="font-italic">Sobre</h4>
@@ -49,12 +50,11 @@
             <div class="p-3">
               <h4 class="font-italic">Recentes</h4>
               <ol class="list-unstyled mb-0">
-                <li><a href="#">Artigo 37</a></li>
-                <li><a href="#">Artigo 36</a></li>
-                <li><a href="#">Artigo 35</a></li>
-                <li><a href="#">Artigo 34</a></li>
-                <li><a href="#">Artigo 33</a></li>
-                <li><a href="#">Artigo 32</a></li>
+                <?php foreach($artigoUltimos as $artigoUltimo){ ?>
+                  <li>
+                    <?= $this->Html->link(__($artigoUltimo->titulo),['controller' => 'Artigo', 'action' => 'view', $artigoUltimo->slug]) ?>
+                  </li>
+                <?php } ?>
               </ol>
             </div>
 
@@ -88,4 +88,4 @@
     </div>
   </div>
 </main>
-<?php var_dump($artigo) ?>
+<?php //var_dump($artigoUltimo) ?>

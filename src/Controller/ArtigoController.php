@@ -34,7 +34,8 @@ class ArtigoController extends AppController
         $artigoAnt = $artigoTable->getArtigoAnt($artigo->id);
         $artigoProx = $artigoTable->getArtigoProx($artigo->id);
         endif;
-        $this->set(compact('artigo', 'artigoAnt', 'artigoProx'));
+        $artigoUltimos = $artigoTable->getArtigoUltimos();
+        $this->set(compact('artigo', 'artigoAnt', 'artigoProx', 'artigoUltimos'));
     }
 
 }

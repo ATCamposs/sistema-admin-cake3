@@ -9,18 +9,21 @@
 
               <div class="row featurette">
                 <div class="col-md-7 order-md-2">
-                  <h2 class = 'featurette-heading blog-post-title'>
-                    <?= $this->Html->link(__($artigo->titulo), ['controller' => 'Artigo', 'action' => 'view', $artigo->slug]) ?>
+                  <h2 class="featurette-heading blog-post-title">
+                      <?= $this->Html->link(__($artigo->titulo), ['controller' => 'Artigo', 'action' => 'view' , $artigo->slug]) ?>
                   </h2>
                   <p class="lead">
                     <?= $artigo->descricao ?>
-                    <?= $this->Html->link(__('Continuar lendo'), ['controller' => 'Artigo', 'action' => 'view', $artigo->slug], ['class' => 'cont-lendo-post text-danger']) ?>
+                    <?= $this->Html->link(__('Continuar lendo'), ['controller' => 'Artigo', 'action' => 'view' , $artigo->slug], ['class' => 'cont-lendo-post text-danger']) ?>
                   </p>
                 </div>
                 <div class="col-md-5 order-md-1">
-                  <?php $imagem = $this->Html->image('../files/artigo/'.$artigo->id.'/'.$artigo->imagem, ['class' => 'featurette-image img-fluid mx-auto', 'alt' => $artigo->titulo]);
-                  echo  $this->Html->link(__($imagem), ['controller' => 'Artigo', 'action' => 'view', $artigo->slug], ['escape' => false]) 
-                  ?>
+                  <a href="artigo.html">
+                    <?php
+                    $imagem = $this->Html->image('../files/artigo/'.$artigo->id.'/'.$artigo->imagem, ['class' => 'featurette-image img-fluid mx-auto', 'alt' => $artigo->titulo]);
+
+                    echo $this->Html->link(__($imagem), ['controller' => 'Artigo', 'action' => 'view' , $artigo->slug], ['escape' => false]);
+                    ?>  
                   </a>
                 </div>
               </div>
@@ -48,12 +51,11 @@
             <div class="p-3">
               <h4 class="font-italic">Recentes</h4>
               <ol class="list-unstyled mb-0">
-                <li><a href="#">Artigo 37</a></li>
-                <li><a href="#">Artigo 36</a></li>
-                <li><a href="#">Artigo 35</a></li>
-                <li><a href="#">Artigo 34</a></li>
-                <li><a href="#">Artigo 33</a></li>
-                <li><a href="#">Artigo 32</a></li>
+                <?php foreach($artigoUltimos as $artigoUltimo){ ?>
+                  <li>
+                    <?= $this->Html->link(__($artigoUltimo->titulo),['controller' => 'Artigo', 'action' => 'view', $artigoUltimo->slug]) ?>
+                  </li>
+                <?php } ?>
               </ol>
             </div>
 
@@ -85,4 +87,4 @@
     </div>
   </div>
 </main>
-<?php var_dump($artigos) ?>
+<?php //var_dump($artigos) ?>

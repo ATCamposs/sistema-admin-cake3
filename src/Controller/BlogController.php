@@ -14,7 +14,7 @@ use Cake\ORM\TableRegistry;
  */
 class BlogController extends AppController
 {
-    
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -31,7 +31,9 @@ class BlogController extends AppController
         $artigoTable = TableRegistry::get('Artigos');
         $artigos = $this->paginate($artigoTable);
 
-        $this->set(compact('artigos'));
+        $artigoUltimos = $artigoTable->getArtigoUltimos();
+
+        $this->set(compact('artigos', 'artigoUltimos'));
     }
 
 }
