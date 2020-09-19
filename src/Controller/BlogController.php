@@ -32,8 +32,8 @@ class BlogController extends AppController
         $artigos = $this->paginate($artigoTable);
 
         $artigoUltimos = $artigoTable->getArtigoUltimos();
-
-        $this->set(compact('artigos', 'artigoUltimos'));
+        $artigoDestaques = $artigoTable->getartigoDestaques();
+        $this->set(compact('artigos', 'artigoUltimos', 'artigoDestaques'));
     }
 
 }

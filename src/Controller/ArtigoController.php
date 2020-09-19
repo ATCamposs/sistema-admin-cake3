@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
+use Cake\Database\Expression\QueryExpression;
 
 /**
  * Artigo Controller
@@ -31,11 +32,14 @@ class ArtigoController extends AppController
         $artigoTable = TableRegistry::get('Artigos');
         $artigo = $artigoTable->getVerArtigo($slug);
         if($artigo):
-        $artigoAnt = $artigoTable->getArtigoAnt($artigo->id);
-        $artigoProx = $artigoTable->getArtigoProx($artigo->id);
+            $artigoAnt = $artigoTable->getArtigoAnt($artigo->id);
+            $artigoProx = $artigoTable->getArtigoProx($artigo->id);
+            $expression = new QueryExpression('qnt_acesso = qnt_acesso + 1');
+            $artigoTable->updateAll([$expression], ['Artigos.id' => $artigo->id]);
         endif;
         $artigoUltimos = $artigoTable->getArtigoUltimos();
-        $this->set(compact('artigo', 'artigoAnt', 'artigoProx', 'artigoUltimos'));
+        $artigoDestaques = $artigoTable->getartigoDestaques();
+        $this->set(compact('artigo', 'artigoAnt', 'artigoProx', 'artigoUltimos', 'artigoDestaques'));
     }
 
 }

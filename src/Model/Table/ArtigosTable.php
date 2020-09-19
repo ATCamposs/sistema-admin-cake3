@@ -181,4 +181,13 @@ class ArtigosTable extends Table
                     ->limit(6);
         return $query;
     }
+
+    public function getArtigoDestaques()
+    {
+        $query = $this->find()
+                    ->select(['titulo', 'slug'])
+                    ->order(['Artigos.qnt_acesso' => 'DESC'])
+                    ->limit(6);
+        return $query;
+    }
 }

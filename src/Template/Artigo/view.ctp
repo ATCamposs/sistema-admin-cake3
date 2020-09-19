@@ -61,12 +61,11 @@
             <div class="p-3">
               <h4 class="font-italic">Destaques</h4>
               <ol class="list-unstyled">
-                <li><a href="#">Artigo 14</a></li>
-                <li><a href="#">Artigo 32</a></li>
-                <li><a href="#">Artigo 21</a></li>
-                <li><a href="#">Artigo 10</a></li>
-                <li><a href="#">Artigo 5</a></li>
-                <li><a href="#">Artigo 27</a></li>
+                <?php foreach($artigoDestaques as $artigoDestaque){ ?>
+                  <li>
+                    <?= $this->Html->link(__($artigoDestaque->titulo),['controller' => 'Artigo', 'action' => 'view', $artigoDestaque->slug]) ?>
+                  </li>
+                <?php } ?>
               </ol>
             </div>
 
