@@ -4,6 +4,8 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
+use Cake\Mailer\Email;
+use Cake\Mailer\MailerAwareTrait;
 
 /**
  * Contact Controller
@@ -26,6 +28,7 @@ class ContactController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    use MailerAwareTrait;
     public function index()
     {
         $contatoMsgsTable = TableRegistry::getTableLocator()->get('ContatosMsgs');
@@ -34,6 +37,7 @@ class ContactController extends AppController
         if($this->request->is('post')){
             $contatoMsg = $contatoMsgsTable->patchEntity($contatoMsg, $this->request->getData());
             if($contatoMsgsTable->save($contatoMsg)){
+                $this->getMailer('Contato')->send('novaMsgContato', [$contatoMsg]);
                 $this->Flash->success(__('Mensagem de contato enviada com Sucesso'));
                 return $this->redirect(['view' => 'index']);
             }else{
