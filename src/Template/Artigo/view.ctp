@@ -5,9 +5,17 @@
           <div class="col-md-8 blog-main">
 
             <div class="blog-post">
-              <h2 class="blog-post-title"><?= $artigo->titulo ?></h2>
+              <h2 class="blog-post-title"><?= $artigo->titulo ?></h2><hr>
               <p class="blog-post-meta">                
-                January 1, 2014 by <a href="#">Mark</a></p>
+                <?php
+                  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+                  date_default_timezone_set('America/Sao_Paulo');
+
+                  //$data = date_format($artigo->created, 'Y-m-d H:i:s');
+
+                  echo strftime ( '%d de %B de %Y' , strtotime(date_format($artigo->created, 'Y-m-d H:i:s')));
+                ?>
+              </p>
               <?= $artigo->conteudo ?>
             </div><!-- /.blog-post -->                
 
