@@ -85,6 +85,17 @@
             ]
             ); ?>
             </li>
+            <li><?= $this->Html->link(
+            '<i class="far fa-newspaper"></i> Artigos',
+            [
+                'controller' => 'Artigos',
+                'action' => 'index'
+            ],
+            [
+                'escape'=> false
+            ]
+            ); ?>
+            </li>
             <li>
             <?= $this->Html->link(
                     '<i class="fas fa-sign-out-alt"></i> Sair',
